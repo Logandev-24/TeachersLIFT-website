@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeacherLIFT Vision Pro - AI-Powered Grading Platform</title>
+    <title>TeacherLIFT Vision Pro - AI-Powered Education Platform</title>
     <style>
         * {
             margin: 0;
@@ -11,25 +11,47 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --warning: #ef4444;
+            --surface: #ffffff;
+            --surface-alt: #f8fafc;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f9fafb;
-            color: #111827;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--text);
             line-height: 1.6;
         }
 
-        /* Header Styles */
+        /* Enhanced Header */
         .header {
-            background: linear-gradient(135deg, #3b82f6 0%, #9333ea 100%);
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: var(--transition);
         }
 
         .header-content {
-            max-width: 1280px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 1rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -38,507 +60,383 @@
         .logo-section {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
         }
 
         .logo-icon {
-            width: 32px;
-            height: 32px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
         }
 
         .app-title {
-            font-size: 1.25rem;
-            font-weight: bold;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
         }
 
         .app-subtitle {
             font-size: 0.875rem;
-            opacity: 0.9;
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
-        /* View Switcher */
+        /* Enhanced View Switcher */
         .view-switcher {
             display: flex;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+            background: var(--surface-alt);
+            border-radius: var(--radius);
             padding: 4px;
+            border: 1px solid var(--border);
         }
 
         .view-btn {
-            padding: 4px 12px;
-            border-radius: 4px;
+            padding: 8px 20px;
+            border-radius: 8px;
             font-size: 0.875rem;
+            font-weight: 600;
             border: none;
             background: transparent;
-            color: white;
+            color: var(--text-muted);
             cursor: pointer;
-            transition: all 0.3s;
-            text-transform: capitalize;
+            transition: var(--transition);
+            position: relative;
         }
 
         .view-btn.active {
-            background: white;
-            color: #3b82f6;
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
         }
 
-        /* Navigation Tabs */
+        .view-btn:hover:not(.active) {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+        }
+
+        /* Enhanced Navigation */
         .nav-tabs {
-            background: white;
-            border-bottom: 1px solid #e5e7eb;
+            background: rgba(255, 255, 255, 0.9);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
         }
 
         .nav-container {
-            max-width: 1280px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 1rem;
+            padding: 0 2rem;
             display: flex;
-            gap: 1.5rem;
+            gap: 2rem;
             overflow-x: auto;
         }
 
         .nav-btn {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 1rem 0.5rem;
+            gap: 12px;
+            padding: 1.25rem 1rem;
             border: none;
             background: none;
-            color: #6b7280;
+            color: var(--text-muted);
             cursor: pointer;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
             white-space: nowrap;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.875rem;
+            position: relative;
         }
 
         .nav-btn:hover {
-            color: #111827;
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
         .nav-btn.active {
-            color: #3b82f6;
-            border-bottom-color: #3b82f6;
+            color: var(--primary);
+            border-bottom-color: var(--primary);
         }
 
         .badge {
-            background: #ef4444;
+            background: linear-gradient(135deg, var(--warning), #f97316);
             color: white;
             font-size: 0.75rem;
-            padding: 2px 8px;
-            border-radius: 9999px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 20px;
+            min-width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
         }
 
-        /* Main Content */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Enhanced Main Content */
         .main-content {
-            max-width: 1280px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 1.5rem 1rem;
+            padding: 2rem;
+            background: transparent;
         }
 
         .page-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Cards and Grids */
+        /* Enhanced Cards */
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        /* Enhanced Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .stat-card {
-            background: white;
-            border-radius: 8px;
-            padding: 1rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
+
+        .stat-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient, linear-gradient(90deg, var(--primary), var(--secondary)));
+        }
+
+        .stat-card.blue::before { --gradient: linear-gradient(90deg, #3b82f6, #1d4ed8); }
+        .stat-card.green::before { --gradient: linear-gradient(90deg, #10b981, #047857); }
+        .stat-card.purple::before { --gradient: linear-gradient(90deg, #8b5cf6, #6d28d9); }
+        .stat-card.orange::before { --gradient: linear-gradient(90deg, #f59e0b, #d97706); }
 
         .stat-icon {
             display: inline-flex;
-            padding: 8px;
-            border-radius: 8px;
-            margin-bottom: 8px;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            font-size: 24px;
+            background: linear-gradient(135deg, var(--bg-from, #dbeafe), var(--bg-to, #bfdbfe));
+            color: var(--icon-color, #3b82f6);
         }
 
-        .stat-icon.blue { background: #dbeafe; color: #3b82f6; }
-        .stat-icon.green { background: #d1fae5; color: #10b981; }
-        .stat-icon.purple { background: #e9d5ff; color: #9333ea; }
-        .stat-icon.orange { background: #fed7aa; color: #f97316; }
+        .stat-card.blue .stat-icon { --bg-from: #dbeafe; --bg-to: #bfdbfe; --icon-color: #3b82f6; }
+        .stat-card.green .stat-icon { --bg-from: #d1fae5; --bg-to: #a7f3d0; --icon-color: #10b981; }
+        .stat-card.purple .stat-icon { --bg-from: #e9d5ff; --bg-to: #c4b5fd; --icon-color: #8b5cf6; }
+        .stat-card.orange .stat-icon { --bg-from: #fed7aa; --bg-to: #fdba74; --icon-color: #f59e0b; }
 
         .stat-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #111827;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-label {
             font-size: 0.875rem;
-            color: #6b7280;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        /* Two Column Grid */
+        /* Enhanced Grid Layouts */
         .two-col-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+        }
+
+        .three-col-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 1.5rem;
         }
 
-        .card {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-title {
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        /* Test Result Item */
-        .test-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem;
-            background: #f9fafb;
-            border-radius: 4px;
-            margin-bottom: 0.75rem;
-        }
-
-        .test-score {
-            font-weight: bold;
-            font-size: 1.125rem;
-        }
-
-        .score-high { color: #10b981; }
-        .score-medium { color: #3b82f6; }
-        .score-low { color: #eab308; }
-
-        /* Insight Cards */
+        /* Enhanced AI Insights */
         .insight-card {
-            padding: 0.75rem;
-            border-radius: 8px;
+            padding: 1.5rem;
+            border-radius: var(--radius);
             border: 1px solid;
-            margin-bottom: 0.75rem;
-        }
-
-        .insight-warning {
-            background: #fef3c7;
-            border-color: #fde68a;
-            color: #92400e;
-        }
-
-        .insight-success {
-            background: #d1fae5;
-            border-color: #a7f3d0;
-            color: #065f46;
-        }
-
-        .insight-info {
-            background: #dbeafe;
-            border-color: #bfdbfe;
-            color: #1e40af;
-        }
-
-        .insight-action {
-            font-size: 0.75rem;
-            margin-top: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .insight-action:hover {
-            text-decoration: underline;
-        }
-
-        /* Grade Tests Section */
-        .selection-btn {
-            width: 100%;
-            padding: 0.75rem;
-            text-align: left;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-bottom: 0.5rem;
-        }
-
-        .selection-btn:hover {
-            border-color: #9ca3af;
-        }
-
-        .selection-btn.selected {
-            border-color: #3b82f6;
-            background: #eff6ff;
-        }
-
-        .selection-btn.selected-student {
-            border-color: #10b981;
-            background: #f0fdf4;
-        }
-
-        .select-input {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
             margin-bottom: 1rem;
-        }
-
-        .grade-btn {
-            width: 100%;
-            background: #3b82f6;
-            color: white;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-
-        .grade-btn:hover:not(:disabled) {
-            background: #2563eb;
-        }
-
-        .grade-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Camera Preview */
-        .camera-preview {
-            background: #111827;
-            border-radius: 8px;
-            height: 256px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .ai-info {
-            margin-top: 1rem;
-            padding: 0.75rem;
-            background: #eff6ff;
-            border-radius: 4px;
-            color: #1e40af;
-            font-size: 0.875rem;
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            margin-bottom: 0.75rem;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 4px;
-            font-size: 0.875rem;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e5e7eb;
-            border-radius: 9999px;
+            transition: var(--transition);
+            position: relative;
             overflow: hidden;
         }
 
-        .progress-fill {
+        .insight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
             height: 100%;
-            border-radius: 9999px;
-            transition: width 0.3s;
+            background: var(--accent-color);
         }
 
-        .progress-fill.high { background: #10b981; }
-        .progress-fill.medium { background: #3b82f6; }
-        .progress-fill.low { background: #eab308; }
-        .progress-fill.very-low { background: #ef4444; }
-
-        /* Student Cards */
-        .student-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
+        .insight-card:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow);
         }
 
-        .student-card {
-            background: white;
-            border-radius: 8px;
-            padding: 1rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        .insight-warning {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-color: #f59e0b;
+            color: #92400e;
+            --accent-color: #f59e0b;
         }
 
-        .student-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.75rem;
+        .insight-success {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            border-color: #10b981;
+            color: #065f46;
+            --accent-color: #10b981;
         }
 
-        .student-grade {
-            font-size: 1.5rem;
-            font-weight: bold;
+        .insight-info {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-color: #3b82f6;
+            color: #1e40af;
+            --accent-color: #3b82f6;
         }
 
-        .intervention-badge {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            color: #991b1b;
-            padding: 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .student-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 0.75rem;
-            padding-top: 0.75rem;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .action-btn {
-            flex: 1;
-            padding: 0.25rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .action-btn.details {
-            background: #eff6ff;
-            color: #3b82f6;
-        }
-
-        .action-btn.details:hover {
-            background: #dbeafe;
-        }
-
-        .action-btn.contact {
-            background: #f0fdf4;
-            color: #10b981;
-        }
-
-        .action-btn.contact:hover {
-            background: #d1fae5;
-        }
-
-        /* Messages */
-        .message-item {
-            padding: 1rem;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .message-item.unread {
-            background: #eff6ff;
-        }
-
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-
-        .message-from {
-            font-weight: 500;
-        }
-
-        .new-badge {
-            background: #3b82f6;
-            color: white;
-            font-size: 0.75rem;
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        .message-subject {
-            font-weight: 500;
-            color: #111827;
-            margin-bottom: 0.25rem;
-        }
-
-        .message-content {
+        .insight-action {
             font-size: 0.875rem;
-            color: #6b7280;
-        }
-
-        .message-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 0.75rem;
-        }
-
-        .msg-btn {
-            padding: 0.25rem 0.75rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 12px;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .msg-btn.reply {
-            background: #3b82f6;
-            color: white;
-        }
-
-        .msg-btn.reply:hover {
-            background: #2563eb;
-        }
-
-        .msg-btn.archive {
-            background: #e5e7eb;
-            color: #374151;
-        }
-
-        .msg-btn.archive:hover {
-            background: #d1d5db;
-        }
-
-        /* Notification Toast */
-        .notification-toast {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background: #10b981;
-            color: white;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
+            transition: var(--transition);
+            display: inline-flex;
             align-items: center;
+            gap: 4px;
+        }
+
+        .insight-action:hover {
+            transform: translateX(4px);
+        }
+
+        /* Enhanced Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             gap: 8px;
-            z-index: 1000;
-            animation: slideIn 0.3s ease-out;
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
         }
 
-        /* Loading Spinner */
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--surface-alt);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface);
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--secondary), #059669);
+            color: white;
+        }
+
+        /* Enhanced Loading States */
         .spinner {
             display: inline-block;
             width: 20px;
@@ -553,88 +451,416 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Utilities */
-        .hidden { display: none !important; }
-        .text-center { text-align: center; }
-        .text-small { font-size: 0.875rem; }
-        .text-gray { color: #6b7280; }
-        .mb-1 { margin-bottom: 0.25rem; }
-        .mb-2 { margin-bottom: 0.5rem; }
-        .mb-3 { margin-bottom: 0.75rem; }
-        .mb-4 { margin-bottom: 1rem; }
+        /* Enhanced Camera Preview */
+        .camera-preview {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-radius: var(--radius);
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
 
-        /* Responsive */
+        .camera-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.3) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+
+        /* Enhanced AI Processing */
+        .ai-processing {
+            text-align: center;
+            z-index: 1;
+            position: relative;
+        }
+
+        .ai-brain {
+            font-size: 64px;
+            margin-bottom: 1rem;
+            animation: brainPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes brainPulse {
+            0%, 100% { transform: scale(1); filter: hue-rotate(0deg); }
+            50% { transform: scale(1.1); filter: hue-rotate(180deg); }
+        }
+
+        /* Enhanced Progress Bars */
+        .progress-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: var(--surface-alt);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, 0.2) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.2) 50%,
+                rgba(255, 255, 255, 0.2) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 30px 30px;
+            animation: progress-stripes 1s linear infinite;
+        }
+
+        @keyframes progress-stripes {
+            0% { background-position: 0 0; }
+            100% { background-position: 30px 0; }
+        }
+
+        .progress-fill.high { background: linear-gradient(135deg, #10b981, #059669); }
+        .progress-fill.medium { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .progress-fill.low { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .progress-fill.very-low { background: linear-gradient(135deg, #ef4444, #dc2626); }
+
+        /* Enhanced Notification Toast */
+        .notification-toast {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, var(--secondary), #059669);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+            animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 400px;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            pointer-events: none;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Enhanced Selection Buttons */
+        .selection-btn {
+            width: 100%;
+            padding: 1rem;
+            text-align: left;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 0.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .selection-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .selection-btn:hover::before {
+            left: 100%;
+        }
+
+        .selection-btn:hover {
+            border-color: var(--primary);
+            transform: translateX(4px);
+            box-shadow: var(--shadow);
+        }
+
+        .selection-btn.selected {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(99, 102, 241, 0.05));
+            transform: scale(1.02);
+        }
+
+        .selection-btn.selected-student {
+            border-color: var(--secondary);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+            transform: scale(1.02);
+        }
+
+        /* Enhanced Teacher Lift Vision Features */
+        .lift-vision-card {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border: 2px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lift-vision-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .feature-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .gap-finder {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+        }
+
+        .micro-lesson {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            border-left: 4px solid var(--secondary);
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+        }
+
+        .engagement-heatmap {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .two-col-grid {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .two-col-grid,
+            .three-col-grid {
                 grid-template-columns: 1fr;
             }
             
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
             }
         }
+
+        /* Tablet */
+        @media (max-width: 1024px) {
+            .two-col-grid {
+                grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            }
+            .three-col-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        /* Small devices */
+        @media (max-width: 640px) {
+            .header-content { padding: 0.75rem 1rem; }
+            .logo-icon { width: 40px; height: 40px; font-size: 20px; }
+            .app-title { font-size: 1.25rem; }
+            .app-subtitle { font-size: 0.8rem; }
+            .view-switcher { width: 100%; flex-wrap: wrap; gap: 6px; justify-content: center; }
+            .view-btn { padding: 8px 12px; flex: 1 1 auto; }
+            .card { padding: 1.25rem; }
+            .stat-value { font-size: 2rem; }
+            .nav-container { gap: 1rem; }
+            .nav-btn { padding: 1rem 0.75rem; }
+            .camera-preview { height: 220px; }
+        }
+
+        /* Very small phones */
+        @media (max-width: 480px) {
+            .main-content { padding: 0.75rem; }
+            .page-title { font-size: 1.25rem; }
+            .nav-btn { gap: 8px; font-size: 0.8rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .two-col-grid, .three-col-grid { grid-template-columns: 1fr; }
+            .feature-badge { top: 0.75rem; right: 0.75rem; padding: 2px 8px; font-size: 0.65rem; }
+            .selection-btn { padding: 0.75rem; }
+            .view-switcher { gap: 4px; }
+        }
+
+        /* Utilities */
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .text-small { font-size: 0.875rem; }
+        .text-gray { color: var(--text-muted); }
+        .mb-1 { margin-bottom: 0.25rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-3 { margin-bottom: 0.75rem; }
+        .mb-4 { margin-bottom: 1rem; }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Focus styles */
+        .btn:focus,
+        .selection-btn:focus,
+        .nav-btn:focus,
+        .view-btn:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
     </style>
+    <!-- Preload font (optional) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      @media (prefers-reduced-motion: reduce) {
+        * { animation: none !important; transition: none !important; }
+      }
+    </style>
+    <!-- API Client -->
+    <script src="api-client.js"></script>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Enhanced Header -->
     <header class="header">
         <div class="header-content">
             <div class="logo-section">
-                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="3"/>
-                    <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
-                    <path d="M20.5 7.5L16 12l4.5 4.5M3.5 7.5L8 12l-4.5 4.5"/>
-                </svg>
+                <div class="logo-icon">🧠</div>
                 <div>
                     <div class="app-title">TeacherLIFT Vision Pro</div>
-                    <div class="app-subtitle">AI-Powered Grading Platform</div>
+                    <div class="app-subtitle">AI-Powered Education Platform</div>
                 </div>
             </div>
             <div class="view-switcher">
-                <button class="view-btn active" onclick="switchView('teacher')">Teacher</button>
-                <button class="view-btn" onclick="switchView('parent')">Parent</button>
-                <button class="view-btn" onclick="switchView('admin')">Admin</button>
+                <button class="view-btn active" onclick="switchView(event, 'teacher')">Teacher</button>
+                <button class="view-btn" onclick="switchView(event, 'parent')">Parent</button>
+                <button class="view-btn" onclick="switchView(event, 'admin')">Admin</button>
+                <button class="view-btn" onclick="openCodeWindow('index.html')">View Code</button>
             </div>
         </div>
     </header>
 
-    <!-- Navigation Tabs (Teacher View) -->
+    <!-- Enhanced Navigation -->
     <nav class="nav-tabs" id="teacherNav">
         <div class="nav-container">
-            <button class="nav-btn active" onclick="switchTab('dashboard')">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button class="nav-btn active" onclick="switchTab(event, 'dashboard')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                 </svg>
                 Dashboard
             </button>
-            <button class="nav-btn" onclick="switchTab('grade')">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <button class="nav-btn" onclick="switchTab(event, 'lift-vision')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
+                </svg>
+                Lift Vision
+                <span class="badge">AI</span>
+            </button>
+            <button class="nav-btn" onclick="switchTab(event, 'grade')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2 2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
                     <circle cx="12" cy="13" r="4"/>
                 </svg>
                 Grade Tests
             </button>
-            <button class="nav-btn" onclick="switchTab('analytics')">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button class="nav-btn" onclick="switchTab(event, 'analytics')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M18 20V10M12 20V4M6 20v-6"/>
                 </svg>
                 Analytics
             </button>
-            <button class="nav-btn" onclick="switchTab('students')">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button class="nav-btn" onclick="switchTab(event, 'students')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                     <circle cx="9" cy="7" r="4"/>
                     <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
                 </svg>
                 Students
             </button>
-            <button class="nav-btn" onclick="switchTab('messages')">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button class="nav-btn" onclick="switchTab(event, 'messages')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                 </svg>
                 Messages
@@ -643,14 +869,12 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main class="main-content" id="mainContent">
-        <!-- Content will be dynamically inserted here -->
-    </main>
+    <!-- Enhanced Main Content -->
+    <main class="main-content" id="mainContent"></main>
 
-    <!-- Notification Toast -->
+    <!-- Enhanced Notification Toast -->
     <div id="notification" class="notification-toast hidden">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M9 11l3 3L22 4"/>
             <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
         </svg>
@@ -658,62 +882,68 @@
     </div>
 
     <script>
-        // Global state
+        function openCodeWindow(relPath){
+            const url = `/view-code?path=${encodeURIComponent(relPath)}`;
+            window.open(url, '_blank');
+        }
+        // Enhanced global state with AI features
         const state = {
             currentView: 'teacher',
             currentTab: 'dashboard',
             classes: [
-                { id: 1, name: 'AP Biology', period: 'Period 1', time: '8:00 AM - 9:30 AM', students: 25, lmsConnected: true },
-                { id: 2, name: 'Algebra II', period: 'Period 2', time: '9:45 AM - 11:15 AM', students: 22, lmsConnected: true },
-                { id: 3, name: 'World History', period: 'Period 3', time: '11:30 AM - 1:00 PM', students: 28, lmsConnected: false },
-                { id: 4, name: 'English Lit', period: 'Period 4', time: '1:45 PM - 3:15 PM', students: 24, lmsConnected: true }
+                { id: 1, name: 'AP Biology', period: 'Period 1', time: '8:00 AM - 9:30 AM', students: 25, lmsConnected: true, aiInsights: 3 },
+                { id: 2, name: 'Algebra II', period: 'Period 2', time: '9:45 AM - 11:15 AM', students: 22, lmsConnected: true, aiInsights: 2 },
+                { id: 3, name: 'World History', period: 'Period 3', time: '11:30 AM - 1:00 PM', students: 28, lmsConnected: false, aiInsights: 1 },
+                { id: 4, name: 'English Lit', period: 'Period 4', time: '1:45 PM - 3:15 PM', students: 24, lmsConnected: true, aiInsights: 4 }
             ],
             students: [
-                { id: 1, name: 'Emma Johnson', studentId: 'EJ001', classId: 1, avgGrade: 92, trend: 'up', parentEmail: 'johnson@email.com' },
-                { id: 2, name: 'Michael Chen', studentId: 'MC002', classId: 1, avgGrade: 88, trend: 'stable', parentEmail: 'chen@email.com' },
-                { id: 3, name: 'Sarah Davis', studentId: 'SD003', classId: 2, avgGrade: 95, trend: 'up', parentEmail: 'davis@email.com' },
-                { id: 4, name: 'James Wilson', studentId: 'JW004', classId: 2, avgGrade: 78, trend: 'down', parentEmail: 'wilson@email.com', needsIntervention: true },
-                { id: 5, name: 'Olivia Martinez', studentId: 'OM005', classId: 1, avgGrade: 85, trend: 'up', parentEmail: 'martinez@email.com' },
-                { id: 6, name: 'William Brown', studentId: 'WB006', classId: 3, avgGrade: 91, trend: 'stable', parentEmail: 'brown@email.com' }
+                { id: 1, name: 'Emma Johnson', studentId: 'EJ001', classId: 1, avgGrade: 92, trend: 'up', parentEmail: 'johnson@email.com', aiRecommendations: ['Advanced practice'] },
+                { id: 2, name: 'Michael Chen', studentId: 'MC002', classId: 1, avgGrade: 88, trend: 'stable', parentEmail: 'chen@email.com', aiRecommendations: ['Review DNA concepts'] },
+                { id: 3, name: 'Sarah Davis', studentId: 'SD003', classId: 2, avgGrade: 95, trend: 'up', parentEmail: 'davis@email.com', aiRecommendations: ['Challenge problems'] },
+                { id: 4, name: 'James Wilson', studentId: 'JW004', classId: 2, avgGrade: 78, trend: 'down', parentEmail: 'wilson@email.com', needsIntervention: true, aiRecommendations: ['Immediate support', 'Parent meeting'] },
+                { id: 5, name: 'Olivia Martinez', studentId: 'OM005', classId: 1, avgGrade: 85, trend: 'up', parentEmail: 'martinez@email.com', aiRecommendations: ['Peer tutoring'] },
+                { id: 6, name: 'William Brown', studentId: 'WB006', classId: 3, avgGrade: 91, trend: 'stable', parentEmail: 'brown@email.com', aiRecommendations: ['Continue current path'] }
             ],
-            rubrics: [
-                { id: 1, name: 'Multiple Choice Standard', questions: 20, points: 100, type: 'MC' },
-                { id: 2, name: 'Math Problem Set', questions: 10, points: 100, type: 'MATH' },
-                { id: 3, name: 'Essay Rubric', questions: 3, points: 100, type: 'ESSAY' },
-                { id: 4, name: 'Lab Report', questions: 5, points: 100, type: 'LAB' }
-            ],
-            testResults: [
-                { id: 1, studentId: 1, classId: 1, score: 92, date: '2024-03-15', testName: 'Chapter 5 Quiz', feedback: 'Excellent work! Strong understanding of cell biology.' },
-                { id: 2, studentId: 2, classId: 1, score: 88, date: '2024-03-15', testName: 'Chapter 5 Quiz', feedback: 'Good job! Review DNA replication for improvement.' },
-                { id: 3, studentId: 3, classId: 2, score: 95, date: '2024-03-14', testName: 'Unit Test', feedback: 'Outstanding performance! Keep up the great work.' },
-                { id: 4, studentId: 4, classId: 2, score: 72, date: '2024-03-14', testName: 'Unit Test', feedback: 'Needs improvement. Schedule tutoring for quadratic equations.' }
-            ],
-            messages: [
-                { id: 1, from: 'Mrs. Johnson', to: 'Teacher', subject: "Emma's Progress", content: 'Thank you for the detailed feedback!', date: '2024-03-15', read: false },
-                { id: 2, from: 'Mr. Wilson', to: 'Teacher', subject: 'Meeting Request', content: 'Can we schedule a meeting about James?', date: '2024-03-14', read: false }
+            aiInsights: [
+                { id: 1, type: 'gap-finder', title: 'DNA Replication Misconception', description: '40% of students confused about enzyme roles', action: 'Generate micro-lesson', classId: 1, priority: 'high' },
+                { id: 2, type: 'engagement', title: 'Low Engagement Detected', description: '6 students showed decreased attention in last 15 min', action: 'Adjust pacing', classId: 2, priority: 'medium' },
+                { id: 3, type: 'success', title: 'Mastery Improvement', description: 'Quadratic equations mastery up 15% after AI lesson', action: 'Continue approach', classId: 2, priority: 'low' },
+                { id: 4, type: 'intervention', title: 'Intervention Needed', description: 'James Wilson - 3 consecutive low scores', action: 'Schedule support', classId: 2, priority: 'urgent' }
             ],
             selectedClass: null,
             selectedStudent: null,
             selectedRubric: null,
-            isGrading: false
+            isGrading: false,
+            isProcessingAI: false,
+            adminSubpage: null
         };
 
-        // Show notification
-        function showNotification(message) {
+        // Enhanced notification system
+        function showNotification(message, type = 'success') {
             const notif = document.getElementById('notification');
             const text = document.getElementById('notificationText');
             text.textContent = message;
+            
+            // Update colors based on type
+            if (type === 'warning') {
+                notif.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+            } else if (type === 'error') {
+                notif.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+            } else {
+                notif.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            }
+            
             notif.classList.remove('hidden');
-            setTimeout(() => notif.classList.add('hidden'), 3000);
+            setTimeout(() => notif.classList.add('hidden'), 4000);
         }
 
-        // Switch view
-        function switchView(view) {
+        // Enhanced view switching
+        function switchView(e, view) {
+            closeModals();
             state.currentView = view;
-            document.querySelectorAll('.view-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
+            document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+            const target = e && (e.currentTarget || e.target);
+            if (target) target.classList.add('active');
             
             document.getElementById('teacherNav').style.display = view === 'teacher' ? 'block' : 'none';
             
@@ -726,23 +956,26 @@
             }
         }
 
-        // Switch tab
-        function switchTab(tab) {
+        // Enhanced tab switching
+        function switchTab(e, tab) {
+            closeModals();
             state.currentTab = tab;
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.closest('.nav-btn').classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            const btn = e && (e.currentTarget || e.target.closest('.nav-btn'));
+            if (btn) btn.classList.add('active');
             renderTeacherView();
         }
 
-        // Render teacher view
+        // Enhanced teacher view renderer
         function renderTeacherView() {
             const content = document.getElementById('mainContent');
             
             switch(state.currentTab) {
                 case 'dashboard':
                     renderDashboard(content);
+                    break;
+                case 'lift-vision':
+                    renderLiftVision(content);
                     break;
                 case 'grade':
                     renderGradeTests(content);
@@ -759,192 +992,395 @@
             }
         }
 
-        // Render dashboard
+        // Enhanced dashboard
         function renderDashboard(container) {
             const stats = {
                 totalStudents: state.students.length,
-                testsGraded: state.testResults.length,
-                avgScore: Math.round(state.testResults.reduce((acc, r) => acc + r.score, 0) / state.testResults.length),
-                interventionsNeeded: state.students.filter(s => s.needsIntervention).length
+                testsGraded: 47,
+                avgScore: 89,
+                interventionsNeeded: state.students.filter(s => s.needsIntervention).length,
+                aiInsights: state.aiInsights.length,
+                timeSaved: 12.5
             };
 
             container.innerHTML = `
-                <h2 class="page-title">Dashboard</h2>
+                <h2 class="page-title">🏠 Dashboard Overview</h2>
                 
                 <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon blue">👥</div>
+                    <div class="stat-card blue">
+                        <div class="stat-icon">👥</div>
                         <div class="stat-value">${stats.totalStudents}</div>
-                        <div class="stat-label">Students</div>
+                        <div class="stat-label">Total Students</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon green">📄</div>
+                    <div class="stat-card green">
+                        <div class="stat-icon">📄</div>
                         <div class="stat-value">${stats.testsGraded}</div>
                         <div class="stat-label">Tests Graded</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon purple">📈</div>
+                    <div class="stat-card purple">
+                        <div class="stat-icon">📈</div>
                         <div class="stat-value">${stats.avgScore}%</div>
-                        <div class="stat-label">Avg Score</div>
+                        <div class="stat-label">Average Score</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon orange">⚠️</div>
-                        <div class="stat-value">${stats.interventionsNeeded}</div>
-                        <div class="stat-label">Need Support</div>
+                    <div class="stat-card orange">
+                        <div class="stat-icon">🧠</div>
+                        <div class="stat-value">${stats.aiInsights}</div>
+                        <div class="stat-label">AI Insights</div>
                     </div>
                 </div>
 
                 <div class="two-col-grid">
                     <div class="card">
-                        <h3 class="card-title">Recent Tests</h3>
-                        ${state.testResults.slice(-3).reverse().map(result => {
-                            const student = state.students.find(s => s.id === result.studentId);
-                            const scoreClass = result.score >= 90 ? 'score-high' : result.score >= 80 ? 'score-medium' : 'score-low';
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text);">🔥 Latest AI Insights</h3>
+                        ${state.aiInsights.slice(0, 3).map(insight => {
+                            const typeClass = insight.type === 'gap-finder' ? 'insight-warning' : 
+                                            insight.type === 'success' ? 'insight-success' : 'insight-info';
+                            const icon = insight.type === 'gap-finder' ? '🔍' : 
+                                       insight.type === 'success' ? '✅' : 
+                                       insight.type === 'engagement' ? '👁️' : '⚠️';
                             return `
-                                <div class="test-item">
-                                    <div>
-                                        <div style="font-weight: 500">${student?.name}</div>
-                                        <div class="text-small text-gray">${result.testName}</div>
+                                <div class="insight-card ${typeClass}">
+                                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                        <span style="font-size: 1.2em;">${icon}</span>
+                                        <strong>${insight.title}</strong>
                                     </div>
-                                    <div style="text-align: right">
-                                        <div class="test-score ${scoreClass}">${result.score}%</div>
-                                        <div class="text-small text-gray">${result.date}</div>
+                                    <div style="margin-bottom: 8px;">${insight.description}</div>
+                                    <div class="insight-action" onclick="showNotification('${insight.action} activated', 'success')">
+                                        ${insight.action} →
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                        <button class="btn btn-primary" onclick="switchTab(event, 'lift-vision')" style="width: 100%; margin-top: 1rem;">
+                            🧠 View All AI Insights
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text);">⚡ Quick Actions</h3>
+                        <div style="display: grid; gap: 1rem;">
+                            <button class="btn btn-primary" onclick="startAIAnalysis()">
+                                🧠 Run AI Analysis
+                            </button>
+                            <button class="btn btn-secondary" onclick="switchTab(event, 'grade')">
+                                📷 Grade New Tests
+                            </button>
+                            <button class="btn btn-secondary" onclick="triggerGenerateMicroLesson()">
+                                📚 Generate Micro-Lesson
+                            </button>
+                            <button class="btn btn-success" onclick="sendBulkParentUpdates()">
+                                📧 Send Parent Updates
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text);">📊 Class Performance Overview</h3>
+                        <button class="btn btn-primary" onclick="openAddClassModal()">➕ Add Class</button>
+                    </div>
+                    <div class="three-col-grid">
+                        ${state.classes.map(cls => {
+                            const avgScore = 85 + Math.floor(Math.random() * 15);
+                            const fillClass = avgScore >= 90 ? 'high' : avgScore >= 80 ? 'medium' : 'low';
+                            return `
+                                <div style="background: var(--surface-alt); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <div>
+                                            <div style="font-weight: 600; color: var(--text);">${cls.name}</div>
+                                            <div style="font-size: 0.875rem; color: var(--text-muted);">${cls.students} students</div>
+                                        </div>
+                                        <div style="background: var(--primary); color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">
+                                            ${cls.aiInsights} AI insights
+                                        </div>
+                                    </div>
+                                    <div class="progress-container">
+                                        <div class="progress-header">
+                                            <span>Performance</span>
+                                            <span style="font-weight: 600">${avgScore}%</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill ${fillClass}" style="width: ${avgScore}%"></div>
+                                        </div>
                                     </div>
                                 </div>
                             `;
                         }).join('')}
                     </div>
+                </div>
+            `;
+        }
+
+        // New Lift Vision feature
+        function renderLiftVision(container) {
+            container.innerHTML = `
+                <h2 class="page-title">🧠 Teacher Lift Vision - AI Enhancement Module</h2>
+                
+                <div class="card lift-vision-card" style="margin-bottom: 2rem;">
+                    <div class="feature-badge">NEW</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--primary);">
+                        🚀 AI-Powered Teaching Assistant
+                    </h3>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem;">
+                        Your intelligent co-teacher that finds learning gaps, generates micro-lessons, and tracks student engagement in real-time.
+                    </p>
+                    
+                    <div class="two-col-grid" style="margin-bottom: 2rem;">
+                        <div>
+                            <h4 style="font-weight: 700; margin-bottom: 1rem;">📊 Time Saved This Week</h4>
+                            <div style="font-size: 3rem; font-weight: 800; color: var(--secondary); margin-bottom: 0.5rem;">4.2 hrs</div>
+                            <div style="color: var(--text-muted);">Automated lesson planning & gap analysis</div>
+                        </div>
+                        <div>
+                            <h4 style="font-weight: 700; margin-bottom: 1rem;">🎯 Success Rate</h4>
+                            <div style="font-size: 3rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">94%</div>
+                            <div style="color: var(--text-muted);">Students show improvement after AI interventions</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="three-col-grid">
+                    <div class="card">
+                        <div class="gap-finder">
+                            <h4 style="font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
+                                🔍 AI Gap-Finder
+                            </h4>
+                            <p style="margin-bottom: 1rem; color: var(--text-muted);">Automatically clusters errors and identifies misconceptions from graded assessments.</p>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #fde68a;">
+                                <div style="font-weight: 600; margin-bottom: 0.5rem;">📍 Current Gap Detected:</div>
+                                <div style="font-size: 0.875rem;">DNA enzyme roles - 8 students need reteaching</div>
+                            </div>
+                            <div style="display:grid; gap: 0.5rem; margin-bottom: 0.75rem;">
+                                <input id="gap-class-name" placeholder="Class name (e.g., AP Biology)" style="padding: 0.6rem 0.8rem; border:1px solid var(--border); border-radius:8px;" />
+                                <textarea id="gap-test-json" placeholder='Optional: paste test results JSON' rows="4" style="padding: 0.6rem 0.8rem; border:1px solid var(--border); border-radius:8px;"></textarea>
+                            </div>
+                            <button class="btn btn-primary" onclick="triggerAnalyzeGaps()" style="width: 100%;">
+                                🔍 Analyze New Gaps
+                            </button>
+                        </div>
+                    </div>
 
                     <div class="card">
-                        <h3 class="card-title">AI Insights</h3>
-                        <div class="insight-card insight-warning">
-                            <div>James Wilson needs intervention - 3 low scores</div>
-                            <div class="insight-action" onclick="showNotification('Intervention plan created')">Take action →</div>
+                        <div class="micro-lesson">
+                            <h4 style="font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
+                                📚 Micro-Lesson Generator
+                            </h4>
+                            <p style="margin-bottom: 1rem; color: var(--text-muted);">Auto-generates 10-minute reteach slides and practice sets aligned to standards.</p>
+                            <div style="display:grid; gap:0.5rem; margin-bottom: 0.75rem;">
+                                <input id="lesson-topic" placeholder="Topic (e.g., DNA Replication)" style="padding: 0.6rem 0.8rem; border:1px solid var(--border); border-radius:8px;" />
+                                <input id="lesson-misconception" placeholder="Misconception (e.g., Enzyme roles confusion)" style="padding: 0.6rem 0.8rem; border:1px solid var(--border); border-radius:8px;" />
+                                <input id="lesson-grade" placeholder="Grade Level (e.g., High School AP Biology)" style="padding: 0.6rem 0.8rem; border:1px solid var(--border); border-radius:8px;" />
+                                <select id="lesson-duration" style="padding: 0.6rem 0.8rem; border:1px solid var(--border); border-radius:8px;">
+                                    <option>10 minutes</option>
+                                    <option>15 minutes</option>
+                                    <option>20 minutes</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-success" onclick="triggerGenerateMicroLesson()" style="width: 100%;">
+                                ✨ Generate Lesson
+                            </button>
                         </div>
-                        <div class="insight-card insight-success">
-                            <div>Class average improved by 5% this week</div>
-                            <div class="insight-action" onclick="showNotification('Viewing detailed report')">Take action →</div>
+                    </div>
+
+                    <div class="card">
+                        <div class="engagement-heatmap">
+                            <h4 style="font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
+                                👁️ Engagement Monitor
+                            </h4>
+                            <p style="margin-bottom: 1rem; color: var(--text-muted);">Real-time attention and participation tracking with privacy-first computer vision.</p>
+                            <div style="background: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #bfdbfe;">
+                                <div style="font-weight: 600; margin-bottom: 0.5rem;">📊 Current Status:</div>
+                                <div style="font-size: 0.875rem;">87% class engagement (above average)</div>
+                            </div>
+                            <button class="btn btn-primary" onclick="toggleEngagementMonitor()" style="width: 100%;">
+                                🎥 Start Monitoring
+                            </button>
                         </div>
-                        <div class="insight-card insight-info">
-                            <div>DNA topic has 40% error rate - review needed</div>
-                            <div class="insight-action" onclick="showNotification('Generating review materials')">Take action →</div>
-                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 2rem;">
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">🎯 Active AI Insights & Recommendations</h3>
+                    <div class="two-col-grid">
+                        ${state.aiInsights.map(insight => {
+                            const typeClass = insight.type === 'gap-finder' ? 'insight-warning' : 
+                                            insight.type === 'success' ? 'insight-success' : 
+                                            insight.type === 'intervention' ? 'insight-warning' : 'insight-info';
+                            const icon = insight.type === 'gap-finder' ? '🔍' : 
+                                       insight.type === 'success' ? '✅' : 
+                                       insight.type === 'engagement' ? '👁️' : 
+                                       insight.type === 'intervention' ? '🚨' : '💡';
+                            const className = state.classes.find(c => c.id === insight.classId)?.name || 'Unknown';
+                            
+                            return `
+                                <div class="insight-card ${typeClass}">
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="font-size: 1.2em;">${icon}</span>
+                                            <strong>${insight.title}</strong>
+                                        </div>
+                                        <span style="background: rgba(0,0,0,0.1); padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">${className}</span>
+                                    </div>
+                                    <div style="margin-bottom: 1rem; line-height: 1.5;">${insight.description}</div>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button class="btn btn-primary" onclick="executeAIAction('${insight.action}')" style="flex: 1; font-size: 0.875rem;">
+                                            ${insight.action}
+                                        </button>
+                                        <button class="btn btn-secondary" onclick="dismissInsight(${insight.id})" style="padding: 8px 12px; font-size: 0.875rem;">
+                                            Dismiss
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
                     </div>
                 </div>
             `;
         }
 
-        // Render grade tests
+        // Enhanced grade tests
         function renderGradeTests(container) {
             const classStudents = state.selectedClass ? 
                 state.students.filter(s => s.classId === state.selectedClass.id) : [];
 
             container.innerHTML = `
-                <h2 class="page-title">Grade Tests</h2>
+                <h2 class="page-title">📷 AI-Powered Grading</h2>
                 
                 <div class="two-col-grid">
                     <div class="card">
-                        <h3 class="card-title">Test Setup</h3>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">⚙️ Test Setup</h3>
                         
-                        <div class="mb-4">
-                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.5rem">Select Class</label>
+                        <div style="margin-bottom: 2rem;">
+                            <label style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--text); margin-bottom: 0.75rem">Select Class</label>
                             <div>
                                 ${state.classes.map(cls => `
                                     <button class="selection-btn ${state.selectedClass?.id === cls.id ? 'selected' : ''}" 
                                             onclick="selectClass(${cls.id})">
-                                        <div style="font-weight: 500">${cls.name}</div>
-                                        <div class="text-small text-gray">${cls.period} • ${cls.students} students</div>
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <div>
+                                                <div style="font-weight: 600">${cls.name}</div>
+                                                <div style="font-size: 0.875rem; color: var(--text-muted)">${cls.period} • ${cls.students} students</div>
+                                            </div>
+                                            <div style="background: ${cls.lmsConnected ? 'var(--secondary)' : 'var(--warning)'}; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">
+                                                ${cls.lmsConnected ? '✓ LMS' : '⚠ No LMS'}
+                                            </div>
+                                        </div>
                                     </button>
                                 `).join('')}
                             </div>
                         </div>
 
                         ${state.selectedClass ? `
-                            <div class="mb-4">
-                                <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.5rem">Select Student</label>
-                                <div style="max-height: 192px; overflow-y: auto">
+                            <div style="margin-bottom: 2rem;">
+                                <label style="display: block; font-size: 0.875rem; font-weight: 600; color: var(--text); margin-bottom: 0.75rem">Select Student</label>
+                                <div style="max-height: 240px; overflow-y: auto; border: 1px solid var(--border); border-radius: var(--radius); padding: 0.5rem;">
                                     ${classStudents.map(student => `
                                         <button class="selection-btn ${state.selectedStudent?.id === student.id ? 'selected-student' : ''}" 
-                                                onclick="selectStudent(${student.id})">
-                                            <div style="font-weight: 500">${student.name}</div>
-                                            <div class="text-small text-gray">Avg: ${student.avgGrade}%</div>
+                                                onclick="selectStudent(${student.id})" style="margin-bottom: 0.5rem;">
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                <div>
+                                                    <div style="font-weight: 600">${student.name}</div>
+                                                    <div style="font-size: 0.875rem; color: var(--text-muted)">${student.studentId}</div>
+                                                </div>
+                                                <div style="text-align: right;">
+                                                    <div style="font-weight: 600; color: ${student.avgGrade >= 90 ? 'var(--secondary)' : student.avgGrade >= 80 ? 'var(--primary)' : 'var(--warning)'}">${student.avgGrade}%</div>
+                                                    <div style="font-size: 0.75rem;">${student.trend === 'up' ? '📈' : student.trend === 'down' ? '📉' : '➡️'}</div>
+                                                </div>
+                                            </div>
                                         </button>
                                     `).join('')}
                                 </div>
                             </div>
                         ` : ''}
 
-                        <div class="mb-4">
-                            <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.5rem">Select Rubric</label>
-                            <select class="select-input" onchange="selectRubric(this.value)">
-                                <option value="">Choose rubric...</option>
-                                ${state.rubrics.map(r => `
-                                    <option value="${r.id}" ${state.selectedRubric?.id === r.id ? 'selected' : ''}>
-                                        ${r.name} (${r.questions} questions)
-                                    </option>
-                                `).join('')}
-                            </select>
-                        </div>
-
-                        <button class="grade-btn" 
-                                onclick="startGrading()"
-                                ${!state.selectedClass || !state.selectedStudent || !state.selectedRubric || state.isGrading ? 'disabled' : ''}>
-                            ${state.isGrading ? '<span class="spinner"></span> AI Processing...' : '📷 Start Grading'}
+                        <button class="btn btn-primary" 
+                                onclick="startAIGrading()"
+                                style="width: 100%; ${!state.selectedClass || !state.selectedStudent || state.isGrading ? 'opacity: 0.5; cursor: not-allowed;' : ''}"
+                                ${!state.selectedClass || !state.selectedStudent || state.isGrading ? 'disabled' : ''}>
+                            ${state.isGrading ? '<span class="spinner"></span> AI Processing...' : '🧠 Start AI Grading'}
                         </button>
                     </div>
 
                     <div class="card">
-                        <h3 class="card-title">Camera Feed</h3>
-                        <div class="camera-preview">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">📹 Live Camera Feed</h3>
+                        <div class="camera-preview" id="cameraPreview">
                             ${state.isGrading ? 
-                                '<div class="text-center"><div style="font-size: 48px; margin-bottom: 1rem">🧠</div><div>AI Processing...</div></div>' :
-                                '<div class="text-center"><div style="font-size: 48px; margin-bottom: 1rem">📷</div><div>Camera Preview</div></div>'
+                                '<div class="ai-processing"><div class="ai-brain">🧠</div><div style="font-size: 1.2rem; font-weight: 600;">AI Vision Processing...</div><div style="margin-top: 0.5rem; opacity: 0.8;">YOLO11 + Claude AI Pipeline</div></div>' :
+                                '<video id="cameraVideo" autoplay playsinline style="width:100%; height:100%; object-fit:cover; display:none;"></video><div id="cameraPlaceholder" style="text-align: center; z-index: 1; position: relative;"><div style="font-size: 64px; margin-bottom: 1rem; opacity: 0.7;">📷</div><div style="font-size: 1.2rem; font-weight: 600;">Camera Ready</div><div style="margin-top: 0.5rem; opacity: 0.8;">Position test paper in frame</div></div>'
                             }
                         </div>
-                        <div class="ai-info">
-                            AI Pipeline: YOLO11 + Claude AI for accurate grading
+                        <div style="display:flex; gap:0.5rem; margin-top: 0.75rem;">
+                            <button class="btn btn-secondary" onclick="startCamera()">Start Camera</button>
+                            <button class="btn btn-secondary" onclick="stopCamera()">Stop Camera</button>
+                            <button class="btn btn-primary" onclick="captureFrame()">Capture Frame</button>
+                        </div>
+                        <canvas id="captureCanvas" class="hidden" width="1280" height="720"></canvas>
+                        <div style="margin-top: 1.5rem; padding: 1rem; background: linear-gradient(135deg, #eff6ff, #dbeafe); border-radius: var(--radius); border: 1px solid #3b82f6;">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem;">
+                                <span style="color: var(--primary); font-size: 1.2em;">🧠</span>
+                                <strong style="color: var(--primary);">AI Pipeline Active</strong>
+                            </div>
+                            <div style="font-size: 0.875rem; color: var(--primary);">
+                                • YOLO11 for document detection<br>
+                                • Claude AI for intelligent grading<br>
+                                • Real-time feedback generation
+                            </div>
                         </div>
                     </div>
                 </div>
             `;
         }
 
-        // Render analytics
+        // Enhanced analytics
         function renderAnalytics(container) {
-            const classPerformance = state.classes.map(cls => {
-                const classResults = state.testResults.filter(r => r.classId === cls.id);
-                const avgScore = classResults.length > 0
-                    ? Math.round(classResults.reduce((acc, r) => acc + r.score, 0) / classResults.length)
-                    : 0;
-                return { ...cls, avgScore };
-            });
-
-            const gradeRanges = [
-                { label: 'A (90-100)', range: r => r.score >= 90 },
-                { label: 'B (80-89)', range: r => r.score >= 80 && r.score < 90 },
-                { label: 'C (70-79)', range: r => r.score >= 70 && r.score < 80 },
-                { label: 'D (60-69)', range: r => r.score >= 60 && r.score < 70 },
-                { label: 'F (0-59)', range: r => r.score < 60 }
-            ];
-
             container.innerHTML = `
-                <h2 class="page-title">Analytics</h2>
+                <h2 class="page-title">📊 Advanced Analytics</h2>
                 
+                <div class="stats-grid" style="margin-bottom: 2rem;">
+                    <div class="stat-card blue">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-value">94%</div>
+                        <div class="stat-label">AI Accuracy</div>
+                    </div>
+                    <div class="stat-card green">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-value">12.5</div>
+                        <div class="stat-label">Hours Saved</div>
+                    </div>
+                    <div class="stat-card purple">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-value">+15%</div>
+                        <div class="stat-label">Performance Boost</div>
+                    </div>
+                    <div class="stat-card orange">
+                        <div class="stat-icon">🎓</div>
+                        <div class="stat-value">87%</div>
+                        <div class="stat-label">Mastery Rate</div>
+                    </div>
+                </div>
+
                 <div class="two-col-grid">
                     <div class="card">
-                        <h3 class="card-title">Class Performance</h3>
-                        ${classPerformance.map(cls => {
-                            const fillClass = cls.avgScore >= 90 ? 'high' : 
-                                             cls.avgScore >= 80 ? 'medium' : 
-                                             cls.avgScore >= 70 ? 'low' : 'very-low';
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">📊 Class Performance Trends</h3>
+                        ${state.classes.map(cls => {
+                            const avgScore = 85 + Math.floor(Math.random() * 15);
+                            const fillClass = avgScore >= 90 ? 'high' : avgScore >= 80 ? 'medium' : 'low';
+                            const trend = Math.random() > 0.5 ? '+' : '';
+                            const trendValue = Math.floor(Math.random() * 10) + 1;
                             return `
                                 <div class="progress-container">
                                     <div class="progress-header">
-                                        <span>${cls.name}</span>
-                                        <span style="font-weight: 500">${cls.avgScore}%</span>
+                                        <span style="font-weight: 600;">${cls.name}</span>
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="font-weight: 600">${avgScore}%</span>
+                                            <span style="font-size: 0.75rem; color: ${trend ? 'var(--secondary)' : 'var(--warning)'}; font-weight: 600;">
+                                                ${trend}${trendValue}%
+                                            </span>
+                                        </div>
                                     </div>
                                     <div class="progress-bar">
-                                        <div class="progress-fill ${fillClass}" style="width: ${cls.avgScore}%"></div>
+                                        <div class="progress-fill ${fillClass}" style="width: ${avgScore}%"></div>
                                     </div>
                                 </div>
                             `;
@@ -952,204 +1388,717 @@
                     </div>
 
                     <div class="card">
-                        <h3 class="card-title">Grade Distribution</h3>
-                        ${gradeRanges.map(grade => {
-                            const count = state.testResults.filter(grade.range).length;
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">🧠 AI Impact Metrics</h3>
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="background: var(--surface-alt); padding: 1rem; border-radius: var(--radius); border-left: 4px solid var(--secondary);">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-weight: 600;">Micro-Lessons Generated</span>
+                                    <span style="font-size: 1.25rem; font-weight: 700; color: var(--secondary);">18</span>
+                                </div>
+                                <div style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">Auto-created this week</div>
+                            </div>
+                            
+                            <div style="background: var(--surface-alt); padding: 1rem; border-radius: var(--radius); border-left: 4px solid var(--accent);">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-weight: 600;">Students Helped</span>
+                                    <span style="font-size: 1.25rem; font-weight: 700; color: var(--accent);">34</span>
+                                </div>
+                                <div style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">Improved after AI intervention</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Enhanced students view
+        function renderStudents(container) {
+            container.innerHTML = `
+                <h2 class="page-title">👥 Student Management</h2>
+                <div style="display:flex; justify-content: flex-end; margin-bottom: 1rem;">
+                    <button class="btn btn-primary" onclick="openAddStudentModal()">➕ Add Student</button>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem;">
+                    ${state.students.map(student => {
+                        const cls = state.classes.find(c => c.id === student.classId);
+                        const gradeClass = student.avgGrade >= 90 ? 'var(--secondary)' : 
+                                          student.avgGrade >= 80 ? 'var(--primary)' : 'var(--warning)';
+                        
+                        return `
+                            <div class="card" style="padding: 1.5rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                                    <div>
+                                        <div style="font-size: 1.125rem; font-weight: 700; color: var(--text);">${student.name}</div>
+                                        <div style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">${student.studentId} • ${cls?.name}</div>
+                                    </div>
+                                    <div style="text-align: right;">
+                                        <div style="font-size: 1.5rem; font-weight: 800; color: ${gradeClass};">${student.avgGrade}%</div>
+                                        <div style="font-size: 0.875rem;">${student.trend === 'up' ? '📈 Rising' : student.trend === 'down' ? '📉 Declining' : '➡️ Stable'}</div>
+                                    </div>
+                                </div>
+                                
+                                ${student.needsIntervention ? 
+                                    '<div style="background: linear-gradient(135deg, #fef2f2, #fee2e2); border: 1px solid #fecaca; color: #991b1b; padding: 0.75rem; border-radius: var(--radius); margin-bottom: 1rem; font-weight: 600;">🚨 Intervention Needed</div>' : ''}
+                                
+                                ${student.aiRecommendations ? `
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="font-size: 0.875rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem;">🧠 AI Recommendations:</div>
+                                        <div style="display: flex; flex-wrap: gap: 0.5rem;">
+                                            ${student.aiRecommendations.map(rec => `
+                                                <span style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(99, 102, 241, 0.05)); color: var(--primary); padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(99, 102, 241, 0.2);">
+                                                    ${rec}
+                                                </span>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                
+                                <div style="display: flex; gap: 0.5rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                                    <button class="btn btn-primary" onclick="showStudentDetails('${student.name}')" style="flex: 1; font-size: 0.875rem;">
+                                        📊 Details
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="contactParent('${student.parentEmail}')" style="flex: 1; font-size: 0.875rem;">
+                                        📧 Contact
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        // Enhanced messages view
+        function renderMessages(container) {
+            const messages = [
+                { id: 1, from: 'Mrs. Johnson', subject: "Emma's Excellent Progress!", content: 'Thank you for the detailed AI-generated feedback on Emma\'s biology test. The personalized practice problems really helped!', date: '2 hours ago', read: false, type: 'parent' },
+                { id: 2, from: 'AI Assistant', subject: 'Weekly Performance Summary', content: 'Your students showed 12% improvement this week. James Wilson still needs additional support in quadratic equations.', date: '1 day ago', read: false, type: 'ai' },
+                { id: 3, from: 'Mr. Wilson', subject: 'Meeting Request for James', content: 'Hi! I received the AI-generated intervention plan. Can we schedule a meeting to discuss James\'s progress this week?', date: '2 days ago', read: true, type: 'parent' },
+                { id: 4, from: 'System', subject: 'Micro-Lesson Generated', content: 'Your DNA replication review lesson is ready! 8 students have been assigned personalized practice problems.', date: '3 days ago', read: true, type: 'system' }
+            ];
+
+            container.innerHTML = `
+                <h2 class="page-title">📬 Messages & Notifications</h2>
+                
+                <div class="two-col-grid">
+                    <div class="card">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">📨 Recent Messages</h3>
+                        ${messages.map(msg => {
+                            const iconMap = { parent: '👨‍👩‍👧‍👦', ai: '🧠', system: '⚙️' };
+                            const colorMap = { parent: 'var(--primary)', ai: 'var(--secondary)', system: 'var(--accent)' };
                             return `
-                                <div style="display: flex; justify-content: space-between; padding: 0.5rem 0">
-                                    <span class="text-small">${grade.label}</span>
-                                    <span style="font-weight: 500">${count} tests</span>
+                                <div style="padding: 1rem; border-bottom: 1px solid var(--border); ${!msg.read ? 'background: linear-gradient(135deg, #eff6ff, #f0f9ff);' : ''} transition: var(--transition);" onmouseover="this.style.background='var(--surface-alt)'" onmouseout="this.style.background='${!msg.read ? 'linear-gradient(135deg, #eff6ff, #f0f9ff)' : 'transparent'}'">
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="font-size: 1.2em;">${iconMap[msg.type]}</span>
+                                            <span style="font-weight: 600; color: var(--text);">${msg.from}</span>
+                                            ${!msg.read ? '<span style="background: var(--primary); color: white; font-size: 0.75rem; padding: 2px 8px; border-radius: 12px; font-weight: 600;">NEW</span>' : ''}
+                                        </div>
+                                        <div style="font-size: 0.875rem; color: var(--text-muted);">${msg.date}</div>
+                                    </div>
+                                    <div style="font-weight: 600; color: var(--text); margin-bottom: 0.5rem;">${msg.subject}</div>
+                                    <div style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 1rem;">${msg.content}</div>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button class="btn btn-primary" onclick="openMessageComposer('${msg.from}', '${msg.subject.replace(/'/g, "\\'")}')" style="font-size: 0.875rem;">Reply</button>
+                                        <button class="btn btn-secondary" onclick="archiveMessage(this)" style="font-size: 0.875rem;">Archive</button>
+                                        ${!msg.read ? `<button class="btn btn-secondary" onclick="markAsRead(${msg.id})" style="font-size: 0.875rem;">Mark Read</button>` : ''}
+                                    </div>
                                 </div>
                             `;
                         }).join('')}
                     </div>
-                </div>
-            `;
-        }
 
-        // Render students
-        function renderStudents(container) {
-            container.innerHTML = `
-                <h2 class="page-title">Students</h2>
-                
-                <div class="student-grid">
-                    ${state.students.map(student => {
-                        const cls = state.classes.find(c => c.id === student.classId);
-                        const studentTests = state.testResults.filter(r => r.studentId === student.id);
-                        const gradeClass = student.avgGrade >= 90 ? 'score-high' : 
-                                          student.avgGrade >= 80 ? 'score-medium' : 'score-low';
-                        
-                        return `
-                            <div class="student-card">
-                                <div class="student-header">
-                                    <div>
-                                        <div style="font-weight: 600">${student.name}</div>
-                                        <div class="text-small text-gray">${cls?.name}</div>
-                                    </div>
-                                    <div class="student-grade ${gradeClass}">${student.avgGrade}%</div>
+                    <div class="card">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">🔔 AI Notifications</h3>
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="background: linear-gradient(135deg, #fef3c7, #fde68a); padding: 1rem; border-radius: var(--radius); border-left: 4px solid var(--accent);">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem;">
+                                    <span style="font-size: 1.2em;">🎯</span>
+                                    <strong>Gap Analysis Complete</strong>
                                 </div>
-                                
-                                ${student.needsIntervention ? 
-                                    '<div class="intervention-badge">Intervention needed</div>' : ''}
-                                
-                                <div class="text-small text-gray">
-                                    <div>Tests taken: ${studentTests.length}</div>
-                                    <div>Trend: ${student.trend === 'up' ? '📈' : student.trend === 'down' ? '📉' : '➡️'}</div>
-                                </div>
-                                
-                                <div class="student-actions">
-                                    <button class="action-btn details" onclick="showNotification('Viewing ${student.name}\\'s details')">
-                                        Details
-                                    </button>
-                                    <button class="action-btn contact" onclick="showNotification('Messaging ${student.parentEmail}')">
-                                        Contact
-                                    </button>
-                                </div>
+                                <div style="font-size: 0.875rem; margin-bottom: 0.75rem;">DNA replication concepts need review for 8 students</div>
+                                <button class="btn btn-primary" onclick="triggerGenerateMicroLesson()" style="font-size: 0.875rem;">
+                                    Generate Lesson
+                                </button>
                             </div>
-                        `;
-                    }).join('')}
-                </div>
-            `;
-        }
 
-        // Render messages
-        function renderMessages(container) {
-            container.innerHTML = `
-                <h2 class="page-title">Messages</h2>
-                
-                <div class="card">
-                    ${state.messages.map(msg => `
-                        <div class="message-item ${!msg.read ? 'unread' : ''}">
-                            <div class="message-header">
-                                <div style="display: flex; align-items: center; gap: 8px">
-                                    <span class="message-from">${msg.from}</span>
-                                    ${!msg.read ? '<span class="new-badge">New</span>' : ''}
+                            <div style="background: linear-gradient(135deg, #d1fae5, #a7f3d0); padding: 1rem; border-radius: var(--radius); border-left: 4px solid var(--secondary);">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem;">
+                                    <span style="font-size: 1.2em;">📈</span>
+                                    <strong>Performance Boost Detected</strong>
                                 </div>
-                                <div class="text-small text-gray">${msg.date}</div>
+                                <div style="font-size: 0.875rem; margin-bottom: 0.75rem;">Algebra II class improved 15% after AI interventions</div>
+                                <button class="btn btn-success" onclick="viewAnalyticsReport()" style="font-size: 0.875rem;">
+                                    View Report
+                                </button>
                             </div>
-                            <div class="message-subject">${msg.subject}</div>
-                            <div class="message-content">${msg.content}</div>
-                            <div class="message-actions">
-                                <button class="msg-btn reply" onclick="showNotification('Opening reply window')">Reply</button>
-                                <button class="msg-btn archive" onclick="showNotification('Message archived')">Archive</button>
-                                ${!msg.read ? `<button class="msg-btn archive" onclick="markAsRead(${msg.id})">Mark as read</button>` : ''}
+
+                            <div style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); padding: 1rem; border-radius: var(--radius); border-left: 4px solid var(--primary);">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem;">
+                                    <span style="font-size: 1.2em;">👁️</span>
+                                    <strong>Engagement Insight</strong>
+                                </div>
+                                <div style="font-size: 0.875rem; margin-bottom: 0.75rem;">Low attention detected in last 15 min - consider break</div>
+                                <button class="btn btn-primary" onclick="adjustClassPacing()" style="font-size: 0.875rem;">
+                                    Adjust Pacing
+                                </button>
                             </div>
                         </div>
-                    `).join('')}
+                    </div>
                 </div>
             `;
         }
 
-        // Render parent view
+        // Enhanced parent view
         function renderParentView() {
             const myChild = state.students[0];
-            const childResults = state.testResults.filter(r => r.studentId === myChild.id);
             const childClass = state.classes.find(c => c.id === myChild.classId);
 
             document.getElementById('mainContent').innerHTML = `
-                <h2 class="page-title">Parent Portal</h2>
+                <h2 class="page-title">👨‍👩‍👧‍👦 Parent Portal</h2>
                 
-                <div class="card">
-                    <h3 class="card-title">Student: ${myChild.name}</h3>
+                <div class="card lift-vision-card" style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--primary);">
+                        📊 ${myChild.name}'s Learning Journey
+                    </h3>
                     
-                    <div class="stats-grid mb-4">
-                        <div class="stat-card" style="background: #eff6ff">
+                    <div class="stats-grid" style="margin-bottom: 2rem;">
+                        <div class="stat-card blue">
+                            <div class="stat-icon">📈</div>
+                            <div class="stat-value">${myChild.avgGrade}%</div>
                             <div class="stat-label">Overall Grade</div>
-                            <div class="stat-value" style="color: #3b82f6">${myChild.avgGrade}%</div>
                         </div>
-                        <div class="stat-card" style="background: #f0fdf4">
-                            <div class="stat-label">Class</div>
-                            <div class="stat-value" style="font-size: 1.125rem; color: #10b981">${childClass?.name}</div>
+                        <div class="stat-card green">
+                            <div class="stat-icon">🎓</div>
+                            <div class="stat-value">${childClass?.name}</div>
+                            <div class="stat-label">Current Class</div>
                         </div>
-                        <div class="stat-card" style="background: #faf5ff">
+                        <div class="stat-card purple">
+                            <div class="stat-icon">${myChild.trend === 'up' ? '📈' : '➡️'}</div>
+                            <div class="stat-value">${myChild.trend === 'up' ? 'Rising' : 'Stable'}</div>
                             <div class="stat-label">Trend</div>
-                            <div class="stat-value">${myChild.trend === 'up' ? '📈' : '➡️'}</div>
+                        </div>
+                        <div class="stat-card orange">
+                            <div class="stat-icon">🧠</div>
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">AI Recommendations</div>
                         </div>
                     </div>
-                    
-                    <h4 class="card-title">Recent Tests</h4>
-                    ${childResults.map(result => {
-                        const scoreClass = result.score >= 90 ? 'score-high' : 'score-medium';
-                        return `
-                            <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.75rem">
-                                <div style="display: flex; justify-content: space-between">
-                                    <div>
-                                        <div style="font-weight: 500">${result.testName}</div>
-                                        <div class="text-small text-gray">${result.date}</div>
-                                    </div>
-                                    <div class="test-score ${scoreClass}">${result.score}%</div>
+                </div>
+
+                <div class="two-col-grid">
+                    <div class="card">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">📚 Recent AI-Generated Practice</h3>
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="background: var(--surface-alt); padding: 1rem; border-radius: var(--radius); border-left: 4px solid var(--primary);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                    <strong>DNA Structure Review</strong>
+                                    <span style="background: var(--secondary); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">Completed</span>
                                 </div>
-                                ${result.feedback ? `<div class="text-small text-gray" style="margin-top: 0.5rem">${result.feedback}</div>` : ''}
+                                <div style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.75rem;">5 personalized problems • Score: 92%</div>
+                                <button class="btn btn-primary" onclick="openPracticeReview('DNA Structure Review', 92)" style="font-size: 0.875rem;">
+                                    Review Results
+                                </button>
                             </div>
-                        `;
-                    }).join('')}
-                    
-                    <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem">
-                        <button class="grade-btn" onclick="showNotification('Opening message to teacher')">
-                            Message Teacher
-                        </button>
-                        <button class="grade-btn" style="background: #10b981" onclick="showNotification('Scheduling conference')">
-                            Schedule Conference
-                        </button>
+
+                            <div style="background: var(--surface-alt); padding: 1rem; border-radius: var(--radius); border-left: 4px solid var(--accent);">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                    <strong>Cell Respiration Quiz</strong>
+                                    <span style="background: var(--accent); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">Available</span>
+                                </div>
+                                <div style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.75rem;">7 adaptive questions • Due: Tomorrow</div>
+                                <button class="btn btn-success" onclick="openPracticeQuiz('Cell Respiration')" style="font-size: 0.875rem;">
+                                    Start Practice
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">💬 Teacher Communication</h3>
+                        <div style="background: linear-gradient(135deg, #f0fdf4, #dcfce7); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--secondary); margin-bottom: 1.5rem;">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 1rem;">
+                                <span style="font-size: 1.2em;">🤖</span>
+                                <strong style="color: var(--secondary);">Latest AI Insight</strong>
+                            </div>
+                            <div style="margin-bottom: 1rem; color: var(--text);">
+                                "Emma shows excellent understanding of cell biology concepts. AI analysis suggests she's ready for advanced practice problems in genetics."
+                            </div>
+                            <div style="font-size: 0.875rem; color: var(--text-muted);">
+                                Generated today by Teacher AI Assistant
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button class="btn btn-primary" onclick="openParentMessageTeacher()" style="flex: 1;">
+                                📧 Message Teacher
+                            </button>
+                            <button class="btn btn-success" onclick="openScheduleMeeting()" style="flex: 1;">
+                                📅 Schedule Meeting
+                            </button>
+                        </div>
                     </div>
                 </div>
             `;
         }
 
-        // Render admin view
+        // Enhanced admin view
         function renderAdminView() {
-            const avgSchoolScore = Math.round(state.testResults.reduce((a, r) => a + r.score, 0) / state.testResults.length);
-            const timeSaved = (state.testResults.length * 5 / 60).toFixed(1);
-
             document.getElementById('mainContent').innerHTML = `
-                <h2 class="page-title">Administrator Dashboard</h2>
+                <h2 class="page-title">🏫 Administrator Dashboard</h2>
                 
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon blue">🏫</div>
+                <div class="stats-grid" style="margin-bottom: 2rem;">
+                    <div class="stat-card blue">
+                        <div class="stat-icon">🏫</div>
                         <div class="stat-value">${state.classes.length}</div>
-                        <div class="stat-label">Classes</div>
+                        <div class="stat-label">Active Classes</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon green">👥</div>
+                    <div class="stat-card green" style="cursor:pointer;" onclick="openStudentDirectory()">
+                        <div class="stat-icon">👥</div>
                         <div class="stat-value">${state.students.length}</div>
-                        <div class="stat-label">Students</div>
+                        <div class="stat-label">Total Students</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon purple">📄</div>
-                        <div class="stat-value">${state.testResults.length}</div>
-                        <div class="stat-label">Tests Graded</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon orange">🧠</div>
-                        <div class="stat-value">99.7%</div>
+                    <div class="stat-card purple">
+                        <div class="stat-icon">🧠</div>
+                        <div class="stat-value">99.2%</div>
                         <div class="stat-label">AI Accuracy</div>
                     </div>
+                    <div class="stat-card orange">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-value">47.3</div>
+                        <div class="stat-label">Hours Saved</div>
+                    </div>
                 </div>
+
+                <div class="two-col-grid">
+                    <div class="card">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">📈 System Performance</h3>
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--surface-alt); border-radius: var(--radius); border-left: 4px solid var(--primary);">
+                                <span style="font-weight: 600;">Average School Performance</span>
+                                <span style="font-size: 1.25rem; font-weight: 700; color: var(--primary);">89.3%</span>
+                            </div>
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--surface-alt); border-radius: var(--radius); border-left: 4px solid var(--secondary);">
+                                <span style="font-weight: 600;">AI Interventions This Week</span>
+                                <span style="font-size: 1.25rem; font-weight: 700; color: var(--secondary);">42</span>
+                            </div>
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--surface-alt); border-radius: var(--radius); border-left: 4px solid var(--accent);">
+                                <span style="font-weight: 600;">Parent Engagement Rate</span>
+                                <span style="font-size: 1.25rem; font-weight: 700; color: var(--accent);">87%</span>
+                            </div>
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--surface-alt); border-radius: var(--radius); border-left: 4px solid var(--warning);">
+                                <span style="font-weight: 600;">LMS Integration Status</span>
+                                <span style="font-size: 1.25rem; font-weight: 700; color: var(--secondary);">Active</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">🎯 AI Impact Analytics</h3>
+                        <div style="background: linear-gradient(135deg, #f8fafc, #e2e8f0); padding: 1.5rem; border-radius: var(--radius); border: 2px solid var(--primary); margin-bottom: 1.5rem;">
+                            <div style="text-align: center; margin-bottom: 1rem;">
+                                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">+23%</div>
+                                <div style="font-weight: 600; color: var(--text);">Overall Student Performance Improvement</div>
+                                <div style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">Since AI implementation</div>
+                            </div>
+                            <div style="display:grid; gap:0.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+                                <button class="btn btn-primary" onclick="generateSyntheticSchool()">🏫 Generate Synthetic School</button>
+                                <button class="btn btn-secondary" onclick="downloadSyntheticJSON()">💾 Export JSON</button>
+                                <button class="btn btn-success" onclick="showSyntheticSummary()">📊 View Summary</button>
+                            </div>
+                        </div>
+                        
+                        <div id="syntheticSummary" style="display:none; background: var(--surface); border:1px solid var(--border); border-radius: 12px; padding: 1rem;">
+                            <h4 style="margin-bottom: 0.5rem;">Mean-size K-12 School (Synthetic)</h4>
+                            <div id="syntheticStats" style="font-size: 0.9rem; color: var(--text);"></div>
+                        </div>
+                        
+                        <div style="display: grid; gap: 0.75rem; margin-top: 1rem;">
+                            <button class="btn btn-primary" onclick="openSyntheticReport()" style="width: 100%;">
+                                📊 Generate Full Report
+                            </button>
+                            <button class="btn btn-secondary" onclick="exportAnalyticsCSV()" style="width: 100%;">
+                                💾 Export Analytics
+                            </button>
+                            <button class="btn btn-success" onclick="openAIConfig()" style="width: 100%;">
+                                ⚙️ AI Configuration
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Enhanced AI functions with real API integration
+        async function startAIAnalysis() {
+            state.isProcessingAI = true;
+            showNotification('🧠 Starting comprehensive AI analysis...', 'success');
+            
+            try {
+                // Prepare class data for analysis
+                const classData = {
+                    classes: state.classes,
+                    students: state.students,
+                    recentGrades: state.students.map(s => ({
+                        studentId: s.id,
+                        name: s.name,
+                        grades: [s.avgGrade]
+                    }))
+                };
                 
-                <div class="card">
-                    <h3 class="card-title">System Overview</h3>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: #f9fafb; border-radius: 4px; margin-bottom: 0.75rem">
-                        <span>Average School Performance</span>
-                        <span style="font-weight: bold">${avgSchoolScore}%</span>
+                // Get AI insights
+                const insights = await teacherLiftAPI.getInsights(classData, 'week');
+                
+                // Process insights into our format
+                if (Array.isArray(insights)) {
+                    state.aiInsights = insights.map((insight, idx) => ({
+                        id: Date.now() + idx,
+                        type: insight.type || 'gap-finder',
+                        title: insight.title,
+                        description: insight.description,
+                        action: insight.action || 'Review',
+                        classId: 1,
+                        priority: insight.priority || 'medium'
+                    }));
+                } else if (insights.raw) {
+                    // Handle raw text response
+                    state.aiInsights.push({
+                        id: Date.now(),
+                        type: 'info',
+                        title: 'AI Analysis Complete',
+                        description: insights.raw.substring(0, 200) + '...',
+                        action: 'View Details',
+                        classId: 1,
+                        priority: 'high'
+                    });
+                }
+                
+                state.isProcessingAI = false;
+                showNotification(`✅ AI analysis complete! Found ${state.aiInsights.length} new insights.`, 'success');
+                
+                if (state.currentTab === 'lift-vision') {
+                    renderLiftVision(document.getElementById('mainContent'));
+                }
+            } catch (error) {
+                state.isProcessingAI = false;
+                showNotification('❌ AI analysis failed. Please try again.', 'error');
+                console.error('AI Analysis error:', error);
+            }
+        }
+
+        async function generateMicroLesson() {
+            showNotification('🧠 AI generating personalized micro-lesson...', 'success');
+            
+            try {
+                // Use the detected gap from our AI insights
+                const topic = "DNA Replication";
+                const misconception = "Confusion about enzyme roles in DNA replication";
+                const gradeLevel = "High School AP Biology";
+                
+                const lesson = await teacherLiftAPI.generateLesson(topic, misconception, gradeLevel);
+                
+                // Store the lesson for display
+                state.generatedLesson = lesson;
+                
+                showNotification('✅ Micro-lesson ready! DNA enzyme review with practice problems generated.', 'success');
+                
+                // Show lesson in a modal or new section
+                displayGeneratedLesson(lesson);
+            } catch (error) {
+                showNotification('❌ Failed to generate lesson. Please try again.', 'error');
+                console.error('Lesson generation error:', error);
+            }
+        }
+        
+        function displayGeneratedLesson(lesson) {
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 2rem;
+                border-radius: 12px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+                max-width: 600px;
+                max-height: 80vh;
+                overflow-y: auto;
+                z-index: 1000;
+            `;
+            
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            `;
+            
+            let content = '<h2 style="margin-bottom: 1rem;">📚 Generated Micro-Lesson</h2>';
+            
+            if (typeof lesson === 'string') {
+                content += `<pre style="white-space: pre-wrap; font-family: inherit;">${lesson}</pre>`;
+            } else if (lesson.raw) {
+                content += `<div style="white-space: pre-wrap;">${lesson.raw}</div>`;
+            } else {
+                content += `<div>${JSON.stringify(lesson, null, 2)}</div>`;
+            }
+            
+            content += `
+                <button onclick="closeModals()" 
+                        class="btn btn-primary" style="margin-top: 1rem;">
+                    Close
+                </button>
+            `;
+            
+            modal.innerHTML = content;
+            document.body.appendChild(backdrop);
+            document.body.appendChild(modal);
+            
+            backdrop.onclick = closeModals;
+        }
+
+        async function analyzeGaps() {
+            showNotification('🔍 AI analyzing learning gaps across all classes...', 'success');
+            
+            try {
+                // Simulate test results for gap analysis
+                const testResults = {
+                    className: "AP Biology",
+                    testName: "DNA Replication Quiz",
+                    questions: [
+                        { id: 1, topic: "DNA polymerase function", correctRate: 0.6 },
+                        { id: 2, topic: "Helicase role", correctRate: 0.55 },
+                        { id: 3, topic: "Leading vs lagging strand", correctRate: 0.8 },
+                        { id: 4, topic: "Okazaki fragments", correctRate: 0.45 }
+                    ],
+                    commonErrors: [
+                        "Confusing DNA polymerase with RNA polymerase",
+                        "Not understanding directionality of synthesis",
+                        "Mixing up enzyme functions"
+                    ]
+                };
+                
+                const analysis = await teacherLiftAPI.analyzeGaps(testResults, "AP Biology");
+                
+                // Display the analysis
+                displayGapAnalysis(analysis);
+                
+                showNotification('✅ Gap analysis complete! Misconception patterns identified.', 'success');
+            } catch (error) {
+                showNotification('❌ Gap analysis failed. Please try again.', 'error');
+                console.error('Gap analysis error:', error);
+            }
+        }
+        
+        function displayGapAnalysis(analysis) {
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 2rem;
+                border-radius: 12px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+                max-width: 600px;
+                max-height: 80vh;
+                overflow-y: auto;
+                z-index: 1000;
+            `;
+            
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            `;
+            
+            let content = '<h2 style="margin-bottom: 1rem;">🔍 Gap Analysis Results</h2>';
+            
+            if (typeof analysis === 'string') {
+                content += `<pre style="white-space: pre-wrap; font-family: inherit;">${analysis}</pre>`;
+            } else if (analysis.raw) {
+                content += `<div style="white-space: pre-wrap;">${analysis.raw}</div>`;
+            } else {
+                content += `<div>${JSON.stringify(analysis, null, 2)}</div>`;
+            }
+            
+            content += `
+                <button onclick="closeModals()" 
+                        class="btn btn-primary" style="margin-top: 1rem;">
+                    Close
+                </button>
+            `;
+            
+            modal.innerHTML = content;
+            document.body.appendChild(backdrop);
+            document.body.appendChild(modal);
+            
+            backdrop.onclick = closeModals;
+        }
+
+        function toggleEngagementMonitor() {
+            showNotification('👁️ Starting real-time engagement monitoring...', 'success');
+            
+            setTimeout(() => {
+                openEngagementMonitor();
+            }, 1500);
+        }
+
+        function executeAIAction(action) {
+            showNotification(`🚀 Executing: ${action}...`, 'success');
+        }
+
+        function dismissInsight(insightId) {
+            const index = state.aiInsights.findIndex(i => i.id === insightId);
+            if (index > -1) {
+                state.aiInsights.splice(index, 1);
+                showNotification('Insight dismissed', 'success');
+                if (state.currentTab === 'lift-vision') {
+                    renderLiftVision(document.getElementById('mainContent'));
+                }
+            }
+        }
+
+        async function startAIGrading() {
+            if (!state.selectedClass || !state.selectedStudent) {
+                showNotification('Please select class and student first', 'warning');
+                return;
+            }
+
+            state.isGrading = true;
+            renderGradeTests(document.getElementById('mainContent'));
+
+            try {
+                // Simulate test answers and rubric
+                const testData = {
+                    studentName: state.selectedStudent.name,
+                    testType: `${state.selectedClass.name} Quiz`,
+                    answers: {
+                        q1: "DNA polymerase adds nucleotides to the 3' end",
+                        q2: "Helicase unwinds the DNA double helix",
+                        q3: "Leading strand is synthesized continuously",
+                        q4: "Okazaki fragments are found on the lagging strand"
+                    },
+                    rubric: {
+                        q1: { correct: "DNA polymerase adds nucleotides to the 3' end of the growing strand", points: 25 },
+                        q2: { correct: "Helicase unwinds the DNA double helix by breaking hydrogen bonds", points: 25 },
+                        q3: { correct: "Leading strand is synthesized continuously in the 5' to 3' direction", points: 25 },
+                        q4: { correct: "Okazaki fragments are short DNA segments on the lagging strand", points: 25 }
+                    }
+                };
+                
+                const grading = await teacherLiftAPI.gradeTest(
+                    testData.studentName,
+                    testData.testType,
+                    testData.answers,
+                    testData.rubric
+                );
+                
+                state.isGrading = false;
+                state.selectedStudent = null;
+                
+                // Display grading results
+                displayGradingResults(grading, testData.studentName);
+                
+                renderGradeTests(document.getElementById('mainContent'));
+            } catch (error) {
+                state.isGrading = false;
+                showNotification('❌ AI grading failed. Please try again.', 'error');
+                console.error('Grading error:', error);
+                renderGradeTests(document.getElementById('mainContent'));
+            }
+        }
+        
+        function displayGradingResults(grading, studentName) {
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 2rem;
+                border-radius: 12px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+                max-width: 700px;
+                max-height: 80vh;
+                overflow-y: auto;
+                z-index: 1000;
+            `;
+            
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            `;
+            
+            let content = `<h2 style="margin-bottom: 1rem;">🎯 AI Grading Results for ${studentName}</h2>`;
+            
+            if (typeof grading === 'string') {
+                content += `<pre style="white-space: pre-wrap; font-family: inherit;">${grading}</pre>`;
+            } else if (grading.raw) {
+                content += `<div style="white-space: pre-wrap;">${grading.raw}</div>`;
+            } else {
+                // Parse the score if available
+                let score = "Calculated";
+                if (grading.total_score) score = grading.total_score;
+                else if (grading.percentage) score = grading.percentage + "%";
+                
+                content += `
+                    <div style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <h3 style="margin: 0;">Score: ${score}</h3>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: #f9fafb; border-radius: 4px; margin-bottom: 0.75rem">
-                        <span>Time Saved This Week</span>
-                        <span style="font-weight: bold">${timeSaved} hours</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: #f9fafb; border-radius: 4px; margin-bottom: 0.75rem">
-                        <span>LMS Integration Status</span>
-                        <span style="font-weight: bold; color: #10b981">Active</span>
-                    </div>
-                    
-                    <button class="grade-btn" style="background: #9333ea; margin-top: 1rem" onclick="showNotification('Generating full report')">
-                        Generate Full Report
+                    <div style="white-space: pre-wrap;">${JSON.stringify(grading, null, 2)}</div>
+                `;
+            }
+            
+            content += `
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                    <button onclick="closeModals()" 
+                            class="btn btn-primary">
+                        Close
+                    </button>
+                    <button onclick="showNotification('Feedback sent to student!', 'success')" 
+                            class="btn btn-success">
+                        Send to Student
                     </button>
                 </div>
             `;
+            
+            modal.innerHTML = content;
+            document.body.appendChild(backdrop);
+            document.body.appendChild(modal);
+            
+            backdrop.onclick = closeModals;
+            
+            showNotification(`🎯 AI grading complete for ${studentName}!`, 'success');
         }
 
-        // Helper functions
         function selectClass(classId) {
             state.selectedClass = state.classes.find(c => c.id === classId);
             state.selectedStudent = null;
@@ -1161,66 +2110,832 @@
             renderGradeTests(document.getElementById('mainContent'));
         }
 
-        function selectRubric(rubricId) {
-            state.selectedRubric = rubricId ? state.rubrics.find(r => r.id === parseInt(rubricId)) : null;
-            renderGradeTests(document.getElementById('mainContent'));
+        function showStudentDetails(studentName) {
+            openStudentDetailModal(studentName);
         }
 
-        function startGrading() {
-            if (!state.selectedClass || !state.selectedStudent || !state.selectedRubric) {
-                showNotification('Please select all required fields');
-                return;
-            }
+        // Parent Portal Functions
+        function openPracticeReview(topic, score) {
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:1.5rem;border-radius:12px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);max-width:600px;z-index:1000;';
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;';
+            
+            modal.innerHTML = `
+                <h3>📚 Practice Review: ${topic}</h3>
+                <div style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                    <div style="font-size: 2rem; font-weight: 700;">${score}%</div>
+                    <div>Excellent work!</div>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <h4>Questions Summary:</h4>
+                    <div style="display: grid; gap: 0.5rem; margin-top: 0.5rem;">
+                        <div>✅ DNA structure basics - Correct</div>
+                        <div>✅ Base pairing rules - Correct</div>
+                        <div>✅ Backbone components - Correct</div>
+                        <div>❌ Antiparallel orientation - Review needed</div>
+                        <div>✅ Major/minor grooves - Correct</div>
+                    </div>
+                </div>
+                <div style="background: var(--surface-alt); padding: 1rem; border-radius: 8px;">
+                    <strong>Teacher Feedback:</strong> Great understanding of DNA structure! Review the antiparallel concept - remember 5' to 3' directionality.
+                </div>
+                <button class="btn btn-primary" onclick="closeModals()" style="margin-top: 1rem;">Close</button>
+            `;
+            
+            document.body.appendChild(backdrop);
+            document.body.appendChild(modal);
+            backdrop.onclick = closeModals;
+        }
 
-            state.isGrading = true;
-            renderGradeTests(document.getElementById('mainContent'));
+        function openPracticeQuiz(topic) {
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:1.5rem;border-radius:12px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);max-width:600px;z-index:1000;';
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;';
+            
+            modal.innerHTML = `
+                <h3>📝 ${topic} Quiz</h3>
+                <div style="margin: 1rem 0;">
+                    <div style="background: var(--surface-alt); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <strong>Question 1 of 7:</strong><br>
+                        Which molecule provides the primary energy currency for cellular respiration?
+                    </div>
+                    <div style="display: grid; gap: 0.5rem;">
+                        <button class="selection-btn" onclick="this.classList.add('selected')">A) Glucose</button>
+                        <button class="selection-btn" onclick="this.classList.add('selected')">B) ATP</button>
+                        <button class="selection-btn" onclick="this.classList.add('selected')">C) Oxygen</button>
+                        <button class="selection-btn" onclick="this.classList.add('selected')">D) Water</button>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 0.5rem; justify-content: space-between; margin-top: 1rem;">
+                    <button class="btn btn-secondary" onclick="closeModals()">Exit Quiz</button>
+                    <button class="btn btn-primary" onclick="showNotification('Answer submitted! Next question...', 'success')">Next →</button>
+                </div>
+            `;
+            
+            document.body.appendChild(backdrop);
+            document.body.appendChild(modal);
+            backdrop.onclick = closeModals;
+        }
 
-            setTimeout(() => {
-                const score = Math.floor(Math.random() * 30) + 70;
-                const newResult = {
-                    id: Date.now(),
-                    studentId: state.selectedStudent.id,
-                    classId: state.selectedClass.id,
-                    score,
-                    date: new Date().toISOString().split('T')[0],
-                    testName: state.selectedRubric.name,
-                    feedback: `Score: ${score}%. ${score >= 80 ? 'Great work!' : 'Needs improvement.'}`
-                };
+        function openParentMessageTeacher() {
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:1.5rem;border-radius:12px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);max-width:600px;z-index:1000;';
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;';
+            
+            modal.innerHTML = `
+                <h3>📧 Message to Teacher</h3>
+                <div style="margin: 1rem 0;">
+                    <input placeholder="Subject" value="Re: Emma's Progress" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.5rem;">
+                    <textarea rows="6" placeholder="Your message..." style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 8px;">Thank you for the detailed AI feedback on Emma's recent work. I appreciate the personalized practice problems!</textarea>
+                </div>
+                <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                    <button class="btn btn-secondary" onclick="closeModals()">Cancel</button>
+                    <button class="btn btn-primary" onclick="showNotification('Message sent to teacher!', 'success'); closeModals();">Send</button>
+                </div>
+            `;
+            
+            document.body.appendChild(backdrop);
+            document.body.appendChild(modal);
+            backdrop.onclick = closeModals;
+        }
 
-                state.testResults.push(newResult);
-                state.isGrading = false;
-                state.selectedStudent = null;
-                state.selectedRubric = null;
+        function openScheduleMeeting() {
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:1.5rem;border-radius:12px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);max-width:500px;z-index:1000;';
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;';
+            
+            modal.innerHTML = `
+                <h3>📅 Schedule Meeting</h3>
+                <div style="margin: 1rem 0;">
+                    <label style="display: block; margin-bottom: 0.5rem;">Select Date:</label>
+                    <input type="date" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1rem;">
+                    
+                    <label style="display: block; margin-bottom: 0.5rem;">Available Times:</label>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                        <button class="selection-btn">3:30 PM</button>
+                        <button class="selection-btn">4:00 PM</button>
+                        <button class="selection-btn">4:30 PM</button>
+                        <button class="selection-btn">5:00 PM</button>
+                    </div>
+                    
+                    <label style="display: block; margin: 1rem 0 0.5rem;">Meeting Type:</label>
+                    <select style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 8px;">
+                        <option>In-Person</option>
+                        <option>Video Call</option>
+                        <option>Phone Call</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                    <button class="btn btn-secondary" onclick="closeModals()">Cancel</button>
+                    <button class="btn btn-success" onclick="showNotification('Meeting scheduled! Confirmation sent.', 'success'); closeModals();">Schedule</button>
+                </div>
+            `;
+            
+            document.body.appendChild(backdrop);
+            document.body.appendChild(modal);
+            backdrop.onclick = closeModals;
+        }
+
+        // Engagement Monitor
+        function openEngagementMonitor() {
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:1.5rem;border-radius:12px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);max-width:700px;z-index:1000;';
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;';
+            
+            ensureSyntheticReady();
+            const engagement = 87 + Math.floor(Math.random() * 10) - 5;
+            
+            modal.innerHTML = `
+                <h3>👁️ Real-Time Engagement Monitor</h3>
+                <div style="text-align: center; margin: 1.5rem 0;">
+                    <div style="font-size: 3rem; font-weight: 800; color: ${engagement >= 85 ? 'var(--secondary)' : engagement >= 70 ? 'var(--primary)' : 'var(--warning)'};">
+                        ${engagement}%
+                    </div>
+                    <div style="color: var(--text-muted);">Current Class Engagement</div>
+                </div>
                 
-                showNotification(`Test graded! Score: ${score}%`);
-                renderGradeTests(document.getElementById('mainContent'));
-            }, 3000);
+                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem; margin: 1rem 0;">
+                    ${Array(24).fill(0).map((_, i) => {
+                        const studentEngagement = 70 + Math.floor(Math.random() * 30);
+                        const color = studentEngagement >= 85 ? '#10b981' : studentEngagement >= 70 ? '#3b82f6' : '#f59e0b';
+                        return `<div style="background: ${color}; height: 40px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.75rem;">${studentEngagement}</div>`;
+                    }).join('')}
+                </div>
+                
+                <div style="background: var(--surface-alt); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                    <strong>AI Recommendations:</strong>
+                    <ul style="margin: 0.5rem 0 0 1rem; padding: 0; list-style: disc;">
+                        <li>Consider a 2-minute movement break</li>
+                        <li>Switch to pair-share activity</li>
+                        <li>Lower-left quadrant shows decreased attention</li>
+                    </ul>
+                </div>
+                
+                <div style="display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 1rem;">
+                    <button class="btn btn-secondary" onclick="closeModals()">Close</button>
+                    <button class="btn btn-primary" onclick="showNotification('Applying engagement boost strategies...', 'success')">Apply Suggestions</button>
+                </div>
+            `;
+            
+            document.body.appendChild(backdrop);
+            document.body.appendChild(modal);
+            backdrop.onclick = closeModals;
+            showNotification(`📊 Engagement heatmap active. Current class engagement: ${engagement}%`, 'success');
+        }
+
+        // AI Configuration
+        function openAIConfig() {
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:1.5rem;border-radius:12px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);max-width:600px;z-index:1000;';
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;';
+            
+            modal.innerHTML = `
+                <h3>⚙️ AI Configuration</h3>
+                <div style="margin: 1rem 0;">
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">AI Analysis Frequency</label>
+                        <select style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 8px;">
+                            <option>Real-time (Continuous)</option>
+                            <option selected>Every 15 minutes</option>
+                            <option>Hourly</option>
+                            <option>Daily Summary</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Intervention Threshold</label>
+                        <input type="range" min="60" max="90" value="75" style="width: 100%;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: var(--text-muted);">
+                            <span>60%</span>
+                            <span>Current: 75%</span>
+                            <span>90%</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">AI Features</label>
+                        <div style="display: grid; gap: 0.5rem;">
+                            <label><input type="checkbox" checked> Automatic Gap Detection</label>
+                            <label><input type="checkbox" checked> Micro-Lesson Generation</label>
+                            <label><input type="checkbox" checked> Parent Communication Drafts</label>
+                            <label><input type="checkbox"> Real-time Camera Monitoring</label>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--surface-alt); padding: 1rem; border-radius: 8px;">
+                        <strong>API Status:</strong> <span style="color: var(--secondary);">✓ Connected</span><br>
+                        <strong>Model:</strong> Claude 3.5 Sonnet<br>
+                        <strong>Usage This Month:</strong> 1,247 requests
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                    <button class="btn btn-secondary" onclick="closeModals()">Cancel</button>
+                    <button class="btn btn-primary" onclick="showNotification('AI settings saved!', 'success'); closeModals();">Save Settings</button>
+                </div>
+            `;
+            
+            document.body.appendChild(backdrop);
+            document.body.appendChild(modal);
+            backdrop.onclick = closeModals;
+        }
+
+        async function contactParent(email) {
+            const student = state.students.find(s => s.parentEmail === email);
+            if (!student) return;
+            
+            showNotification(`📧 Generating AI message for ${email}...`, 'success');
+            
+            try {
+                const updates = {
+                    recentScore: student.avgGrade + "%",
+                    trend: student.trend,
+                    strengths: ["Active participation", "Good understanding of core concepts"],
+                    areasForImprovement: student.needsIntervention ? 
+                        ["Needs support with recent topics", "Would benefit from additional practice"] :
+                        ["Continue current study habits"],
+                    recentTopics: ["DNA Replication", "Cell Biology"]
+                };
+                
+                const message = await teacherLiftAPI.generateParentMessage(
+                    student.name,
+                    "Parent",
+                    updates,
+                    student.needsIntervention ? "supportive and constructive" : "positive and encouraging"
+                );
+                
+                displayParentMessage(message, email, student.name);
+            } catch (error) {
+                showNotification('❌ Failed to generate message. Please try again.', 'error');
+                console.error('Parent message error:', error);
+            }
+        }
+        
+        function displayParentMessage(message, email, studentName) {
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 2rem;
+                border-radius: 12px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+                max-width: 600px;
+                max-height: 80vh;
+                overflow-y: auto;
+                z-index: 1000;
+            `;
+            
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            `;
+            
+            const content = `
+                <h2 style="margin-bottom: 1rem;">📧 Parent Communication</h2>
+                <div style="background: var(--surface-alt); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                    <strong>To:</strong> ${email}<br>
+                    <strong>Re:</strong> ${studentName}'s Progress Update
+                </div>
+                <div style="white-space: pre-wrap; line-height: 1.6; margin-bottom: 1.5rem;">${message}</div>
+                <div style="display: flex; gap: 1rem;">
+                    <button onclick="closeModals()" 
+                            class="btn btn-secondary">
+                        Cancel
+                    </button>
+                    <button onclick="showNotification('Message sent to ${email}!', 'success'); closeModals();" 
+                            class="btn btn-primary">
+                        Send Message
+                    </button>
+                </div>
+            `;
+            
+            modal.innerHTML = content;
+            document.body.appendChild(backdrop);
+            document.body.appendChild(modal);
+            
+            backdrop.onclick = closeModals;
         }
 
         function markAsRead(messageId) {
-            const message = state.messages.find(m => m.id === messageId);
-            if (message) {
-                message.read = true;
-                updateMessageBadge();
-                renderMessages(document.getElementById('mainContent'));
-                showNotification('Message marked as read');
-            }
-        }
-
-        function updateMessageBadge() {
-            const unreadCount = state.messages.filter(m => !m.read).length;
+            showNotification('Message marked as read', 'success');
+            // Update badge count
             const badge = document.getElementById('messageBadge');
             if (badge) {
-                badge.textContent = unreadCount;
-                badge.style.display = unreadCount > 0 ? 'inline-block' : 'none';
+                const currentCount = parseInt(badge.textContent);
+                const next = Math.max(0, currentCount - 1);
+                badge.textContent = String(next);
+                if (next === 0) {
+                    badge.style.display = 'none';
+                }
             }
         }
 
-        // Initialize app
+        // Initialize the enhanced app
         document.addEventListener('DOMContentLoaded', () => {
             renderDashboard(document.getElementById('mainContent'));
-            updateMessageBadge();
         });
+
+        // Interactive triggers wrapping API functions
+        function triggerAnalyzeGaps() {
+            const className = document.getElementById('gap-class-name')?.value?.trim() || 'AP Biology';
+            const pasted = document.getElementById('gap-test-json')?.value?.trim();
+            if (pasted) {
+                try {
+                    const parsed = JSON.parse(pasted);
+                    teacherLiftAPI.analyzeGaps(parsed, className).then(displayGapAnalysis).then(() => {
+                        showNotification('✅ Gap analysis complete!', 'success');
+                    }).catch(err => {
+                        console.error(err); showNotification('❌ Gap analysis failed.', 'error');
+                    });
+                    return;
+                } catch(e) {
+                    showNotification('Invalid JSON. Running default analysis...', 'warning');
+                }
+            }
+            analyzeGaps();
+        }
+
+        function triggerGenerateMicroLesson() {
+            const topic = document.getElementById('lesson-topic')?.value?.trim() || 'DNA Replication';
+            const misconception = document.getElementById('lesson-misconception')?.value?.trim() || 'Confusion about enzyme roles in DNA replication';
+            const gradeLevel = document.getElementById('lesson-grade')?.value?.trim() || 'High School AP Biology';
+            const duration = document.getElementById('lesson-duration')?.value || '10 minutes';
+            showNotification('🧠 Generating lesson...', 'success');
+            teacherLiftAPI.generateLesson(topic, misconception, gradeLevel, duration)
+                .then(lesson => { state.generatedLesson = lesson; displayGeneratedLesson(lesson); showNotification('✅ Lesson ready!', 'success'); })
+                .catch(err => { console.error(err); showNotification('❌ Failed to generate lesson.', 'error'); });
+        }
+
+        // Camera controls for grading view
+        let mediaStream = null;
+        async function startCamera() {
+            try {
+                mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
+                const vid = document.getElementById('cameraVideo');
+                const placeholder = document.getElementById('cameraPlaceholder');
+                if (vid) { vid.srcObject = mediaStream; vid.style.display = 'block'; }
+                if (placeholder) { placeholder.style.display = 'none'; }
+                showNotification('🎥 Camera started', 'success');
+            } catch (e) {
+                console.error(e);
+                showNotification('❌ Could not start camera', 'error');
+            }
+        }
+        function stopCamera() {
+            if (mediaStream) {
+                mediaStream.getTracks().forEach(t => t.stop());
+                mediaStream = null;
+            }
+            const vid = document.getElementById('cameraVideo');
+            const placeholder = document.getElementById('cameraPlaceholder');
+            if (vid) { vid.srcObject = null; vid.style.display = 'none'; }
+            if (placeholder) { placeholder.style.display = 'block'; }
+            showNotification('🛑 Camera stopped', 'success');
+        }
+        function captureFrame() {
+            const vid = document.getElementById('cameraVideo');
+            const canvas = document.getElementById('captureCanvas');
+            if (!vid || !canvas || vid.style.display === 'none') {
+                showNotification('Start the camera first', 'warning');
+                return;
+            }
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width, h = canvas.height;
+            ctx.drawImage(vid, 0, 0, w, h);
+            canvas.classList.remove('hidden');
+            showNotification('📸 Frame captured (for future vision grading)', 'success');
+        }
+
+        // Synthetic K-12 dataset (approx. mean-sized US school)
+        let syntheticSchool = null;
+        function generateSyntheticSchool() {
+            // Approximate mean ranges based on general K-12 distributions (illustrative)
+            const numStudents = 520; // typical mid-size
+            const numTeachers = Math.round(numStudents / 16); // ~16:1 student-teacher ratio
+            const numClasses = 24; // sections across K-12
+            const grades = Array.from({ length: 13 }, (_, i) => ({
+                grade: i === 0 ? 'K' : i,
+                sections: Math.max(2, Math.round(2 + Math.random() * 2)),
+                avgClassSize: Math.round(22 + Math.random() * 6)
+            }));
+            const subjects = ['Math', 'ELA', 'Science', 'Social Studies', 'Arts', 'PE', 'Computer Science'];
+            const scoreDist = subjects.map(s => ({
+                subject: s,
+                avg: Math.round(70 + Math.random() * 20),
+                stdDev: Math.round(8 + Math.random() * 6)
+            }));
+            const attendance = {
+                dailyAvgPercent: (92 + Math.random() * 4).toFixed(1),
+                tardyRatePercent: (6 + Math.random() * 3).toFixed(1)
+            };
+            const interventions = {
+                weeklyCount: Math.round(20 + Math.random() * 15),
+                topNeeds: ['Foundational numeracy', 'Reading fluency', 'Study habits']
+            };
+            const demographics = {
+                freeReducedLunchPercent: (48 + Math.random() * 10).toFixed(1),
+                englishLearnersPercent: (9 + Math.random() * 6).toFixed(1),
+                specialEducationPercent: (12 + Math.random() * 4).toFixed(1)
+            };
+            syntheticSchool = {
+                schoolName: 'Riverview K-12 (Synthetic)',
+                numStudents, numTeachers, numClasses, grades, scoreDist, attendance, interventions, demographics
+            };
+            showNotification('🏫 Synthetic school generated', 'success');
+            showSyntheticSummary();
+        }
+        function showSyntheticSummary() {
+            if (!syntheticSchool) generateSyntheticSchool();
+            const el = document.getElementById('syntheticSummary');
+            const stats = document.getElementById('syntheticStats');
+            const s = syntheticSchool;
+            stats.innerHTML = `
+                <div><strong>Students:</strong> ${s.numStudents} • <strong>Teachers:</strong> ${s.numTeachers} • <strong>Classes:</strong> ${s.numClasses}</div>
+                <div><strong>Attendance:</strong> ${s.attendance.dailyAvgPercent}% daily • <strong>Tardy:</strong> ${s.attendance.tardyRatePercent}%</div>
+                <div><strong>Demographics:</strong> FRL ${s.demographics.freeReducedLunchPercent}%, EL ${s.demographics.englishLearnersPercent}%, SPED ${s.demographics.specialEducationPercent}%</div>
+                <div style="margin-top:0.5rem;"><strong>Scores:</strong> ${s.scoreDist.map(d=>`${d.subject} ${d.avg}±${d.stdDev}`).join(' • ')}</div>
+            `;
+            el.style.display = 'block';
+        }
+        function downloadSyntheticJSON() {
+            if (!syntheticSchool) generateSyntheticSchool();
+            const blob = new Blob([JSON.stringify(syntheticSchool, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'synthetic_k12_school.json';
+            document.body.appendChild(a); a.click(); a.remove();
+            URL.revokeObjectURL(url);
+            showNotification('💾 Downloaded synthetic JSON', 'success');
+        }
+        function exportAnalyticsCSV() {
+            if (!syntheticSchool) generateSyntheticSchool();
+            const s = syntheticSchool;
+            const rows = [
+                ['Metric','Value'],
+                ['Students', s.numStudents],
+                ['Teachers', s.numTeachers],
+                ['Classes', s.numClasses],
+                ['Attendance %', s.attendance.dailyAvgPercent],
+                ['Tardy %', s.attendance.tardyRatePercent],
+                ['FRL %', s.demographics.freeReducedLunchPercent],
+                ['EL %', s.demographics.englishLearnersPercent],
+                ['SPED %', s.demographics.specialEducationPercent],
+            ];
+            s.scoreDist.forEach(d => rows.push([`Score ${d.subject}`, `${d.avg}`]));
+            const csv = rows.map(r => r.map(v => typeof v === 'string' && v.includes(',') ? `"${v}"` : v).join(',')).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'analytics_export.csv';
+            document.body.appendChild(a); a.click(); a.remove();
+            URL.revokeObjectURL(url);
+            showNotification('💾 CSV exported', 'success');
+        }
+
+        // Utility: close all modals/backdrops
+        function closeModals() {
+            document.querySelectorAll('.modal-container, .modal-backdrop').forEach(el => el.remove());
+        }
+        window.addEventListener('keydown', (evt) => {
+            if (evt.key === 'Escape') closeModals();
+        });
+
+        function openStudentDirectory() {
+            state.currentView = 'teacher';
+            state.currentTab = 'students';
+            document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
+            const teacherBtn = document.querySelector('.view-btn:nth-child(1)');
+            if (teacherBtn) teacherBtn.classList.add('active');
+            renderTeacherView();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openAddStudentModal() {
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = `
+                position: fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+                background:white; padding:1.25rem; border-radius:12px; box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);
+                z-index:1000; width: 420px; max-width: 92vw;
+            `;
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = `position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:999;`;
+            modal.innerHTML = `
+                <h3 style="margin-bottom: 0.75rem;">➕ Add New Student</h3>
+                <div style="display:grid; gap:0.5rem;">
+                    <input id="newStudentName" placeholder="Full name" style="padding:0.6rem 0.8rem; border:1px solid var(--border); border-radius:8px;" />
+                    <input id="newStudentId" placeholder="Student ID (e.g., AB123)" style="padding:0.6rem 0.8rem; border:1px solid var(--border); border-radius:8px;" />
+                    <select id="newStudentClass" style="padding:0.6rem 0.8rem; border:1px solid var(--border); border-radius:8px;">
+                        ${state.classes.map(c=>`<option value="${c.id}">${c.name}</option>`).join('')}
+                    </select>
+                    <input id="newParentEmail" placeholder="Parent Email" style="padding:0.6rem 0.8rem; border:1px solid var(--border); border-radius:8px;" />
+                </div>
+                <div style="display:flex; gap:0.5rem; justify-content:flex-end; margin-top:0.75rem;">
+                    <button class="btn btn-secondary" onclick="closeModals()">Cancel</button>
+                    <button class="btn btn-primary" onclick="addStudentFromModal()">Add</button>
+                </div>
+            `;
+            document.body.appendChild(backdrop);
+            document.body.appendChild(modal);
+            backdrop.onclick = closeModals;
+        }
+
+        function addStudentFromModal() {
+            const name = document.getElementById('newStudentName')?.value?.trim();
+            const sid = document.getElementById('newStudentId')?.value?.trim();
+            const classId = parseInt(document.getElementById('newStudentClass')?.value || '1', 10);
+            const email = document.getElementById('newParentEmail')?.value?.trim();
+            if (!name || !sid || !email) { showNotification('Please fill all fields', 'warning'); return; }
+            const newId = Math.max(0, ...state.students.map(s=>s.id)) + 1;
+            state.students.push({ id: newId, name, studentId: sid, classId, avgGrade: 85, trend: 'stable', parentEmail: email });
+            closeModals();
+            showNotification('✅ Student added', 'success');
+            if (state.currentView === 'teacher' && state.currentTab === 'students') {
+                renderStudents(document.getElementById('mainContent'));
+            }
+        }
+
+        // Add Class modal & handler
+        function openAddClassModal() {
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = `
+                position: fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+                background:white; padding:1.25rem; border-radius:12px; box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);
+                z-index:1000; width: 420px; max-width: 92vw;
+            `;
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = `position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:999;`;
+            modal.innerHTML = `
+                <h3 style="margin-bottom: 0.75rem;">➕ Add New Class</h3>
+                <div style="display:grid; gap:0.5rem;">
+                    <input id="newClassName" placeholder="Class name (e.g., Chemistry)" style="padding:0.6rem 0.8rem; border:1px solid var(--border); border-radius:8px;" />
+                    <input id="newClassPeriod" placeholder="Period (e.g., Period 5)" style="padding:0.6rem 0.8rem; border:1px solid var(--border); border-radius:8px;" />
+                    <input id="newClassTime" placeholder="Time (e.g., 10:15 AM - 11:45 AM)" style="padding:0.6rem 0.8rem; border:1px solid var(--border); border-radius:8px;" />
+                    <input id="newClassStudents" type="number" min="0" placeholder="Number of students (e.g., 25)" style="padding:0.6rem 0.8rem; border:1px solid var(--border); border-radius:8px;" />
+                    <label style="display:flex; align-items:center; gap:8px; font-size:0.9rem; color:var(--text);"><input id="newClassLMS" type="checkbox" /> LMS Connected</label>
+                </div>
+                <div style="display:flex; gap:0.5rem; justify-content:flex-end; margin-top:0.75rem;">
+                    <button class="btn btn-secondary" onclick="closeModals()">Cancel</button>
+                    <button class="btn btn-primary" onclick="addClassFromModal()">Add Class</button>
+                </div>
+            `;
+            document.body.appendChild(backdrop);
+            document.body.appendChild(modal);
+            backdrop.onclick = closeModals;
+        }
+
+        function addClassFromModal() {
+            const name = document.getElementById('newClassName')?.value?.trim();
+            const period = document.getElementById('newClassPeriod')?.value?.trim() || 'New Period';
+            const time = document.getElementById('newClassTime')?.value?.trim() || 'TBD';
+            const students = parseInt(document.getElementById('newClassStudents')?.value || '0', 10);
+            const lmsConnected = !!document.getElementById('newClassLMS')?.checked;
+            if (!name) { showNotification('Please provide a class name', 'warning'); return; }
+            const newId = Math.max(0, ...state.classes.map(c=>c.id)) + 1;
+            state.classes.push({ id: newId, name, period, time, students: isNaN(students)?0:students, lmsConnected, aiInsights: 0 });
+            closeModals();
+            showNotification('✅ Class added', 'success');
+            if (state.currentView === 'teacher') {
+                renderTeacherView();
+            }
+        }
+
+        // Synthetic helpers and unified actions
+        function ensureSyntheticReady() { if (!syntheticSchool) generateSyntheticSchool(); }
+        function computeSyntheticInsights() {
+            ensureSyntheticReady();
+            const s = syntheticSchool;
+            const lowest = [...s.scoreDist].sort((a,b)=>a.avg-b.avg)[0];
+            const highTardy = parseFloat(s.attendance.tardyRatePercent) > 7.5;
+            const insights = [
+                { type: 'gap-finder', title: `${lowest.subject} Mastery Gap`, description: `Average ${lowest.subject} score is ${lowest.avg} with SD ±${lowest.stdDev}. Focus on foundational skills.`, action: 'Generate micro-lesson', classId: 1, priority: 'high' },
+                { type: 'success', title: 'Targeted Interventions Working', description: `${s.interventions.weeklyCount} interventions delivered this week. Continue strategy for at-risk students.`, action: 'Continue approach', classId: 2, priority: 'medium' }
+            ];
+            if (highTardy) insights.push({ type: 'engagement', title: 'Attendance/Tardy Concern', description: `Tardy rate at ${s.attendance.tardyRatePercent}%. Consider bell-work routine and positive reinforcement.`, action: 'Adjust pacing', classId: 3, priority: 'medium' });
+            return insights;
+        }
+        function openSyntheticReport() {
+            ensureSyntheticReady();
+            const s = syntheticSchool;
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:1.25rem;border-radius:14px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.35);max-width:860px;width:92vw;max-height:84vh;overflow:auto;z-index:1000;';
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;';
+            modal.innerHTML = `
+                <div style="background: linear-gradient(135deg, #6366f1, #10b981); color: white; padding: 1rem 1.25rem; border-radius: 10px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <div style="font-size:1.4rem;">📊</div>
+                        <div>
+                            <div style="font-size: 1.15rem; font-weight: 800; letter-spacing: .2px;">School Performance Report (Synthetic)</div>
+                            <div style="opacity:.9; font-size:.9rem;">Riverview K-12 • Generated from synthetic norms</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 1rem;">
+                    <div style="background: var(--surface); border:1px solid var(--border); border-radius: 12px; padding: 1rem;">
+                        <div style="font-size: .8rem; color: var(--text-muted);">Enrollment</div>
+                        <div style="font-size: 1.6rem; font-weight: 800; color: var(--text);">${s.numStudents}</div>
+                        <div style="font-size:.85rem; color: var(--text-muted);">students</div>
+                    </div>
+                    <div style="background: var(--surface); border:1px solid var(--border); border-radius: 12px; padding: 1rem;">
+                        <div style="font-size: .8rem; color: var(--text-muted);">Teachers</div>
+                        <div style="font-size: 1.6rem; font-weight: 800; color: var(--text);">${s.numTeachers}</div>
+                        <div style="font-size:.85rem; color: var(--text-muted);">staff</div>
+                    </div>
+                    <div style="background: var(--surface); border:1px solid var(--border); border-radius: 12px; padding: 1rem;">
+                        <div style="font-size: .8rem; color: var(--text-muted);">Classes</div>
+                        <div style="font-size: 1.6rem; font-weight: 800; color: var(--text);">${s.numClasses}</div>
+                        <div style="font-size:.85rem; color: var(--text-muted);">active</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #eef2ff, #ecfeff); border:1px solid var(--border); border-radius: 12px; padding: 1rem;">
+                        <div style="font-size: .8rem; color: #334155;">Attendance (Daily)</div>
+                        <div style="font-size: 1.6rem; font-weight: 800; color: #0ea5e9;">${s.attendance.dailyAvgPercent}%</div>
+                        <div style="height: 8px; background: #e2e8f0; border-radius: 999px; margin-top: .5rem; overflow: hidden;">
+                            <div style="width: ${s.attendance.dailyAvgPercent}%; height: 100%; background: linear-gradient(90deg, #60a5fa, #0ea5e9);"></div>
+                        </div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #fff7ed, #fef3c7); border:1px solid var(--border); border-radius: 12px; padding: 1rem;">
+                        <div style="font-size: .8rem; color: #7c2d12;">Tardy Rate</div>
+                        <div style="font-size: 1.6rem; font-weight: 800; color: #f59e0b;">${s.attendance.tardyRatePercent}%</div>
+                        <div style="height: 8px; background: #fde68a; border-radius: 999px; margin-top: .5rem; overflow: hidden;">
+                            <div style="width: ${Math.min(100, parseFloat(s.attendance.tardyRatePercent) * 2)}%; height: 100%; background: linear-gradient(90deg, #f59e0b, #d97706);"></div>
+                        </div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #ecfeff, #d1fae5); border:1px solid var(--border); border-radius: 12px; padding: 1rem;">
+                        <div style="font-size: .8rem; color: #14532d;">Interventions (Weekly)</div>
+                        <div style="font-size: 1.6rem; font-weight: 800; color: #10b981;">${s.interventions.weeklyCount}</div>
+                        <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin-top:.5rem;">
+                            ${s.interventions.topNeeds.map(n=>`<span style="background: rgba(16,185,129,.12); color:#065f46; border:1px solid rgba(16,185,129,.25); padding:2px 8px; border-radius:999px; font-size:.75rem; font-weight:700;">${n}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1rem; background: var(--surface); border:1px solid var(--border); border-radius: 12px; padding: 1rem;">
+                    <div style="display:flex; align-items:center; justify-content: space-between;">
+                        <div style="font-weight: 700; color: var(--text);">Subject Averages</div>
+                        <div style="font-size: .85rem; color: var(--text-muted);">Goal ≥ 85%</div>
+                    </div>
+                    <div style="display:grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: .75rem;">
+                        ${s.scoreDist.map(d=>`
+                            <div style="border:1px solid var(--border); border-radius:10px; padding:.75rem; background: var(--surface-alt);">
+                                <div style="display:flex; align-items:center; justify-content: space-between; margin-bottom:.35rem;">
+                                    <div style="font-weight:600; color:var(--text);">${d.subject}</div>
+                                    <div style="font-weight:800; color:${d.avg>=85?'#10b981':d.avg>=75?'#6366f1':'#f59e0b'};">${d.avg}%</div>
+                                </div>
+                                <div style="height: 8px; background: #e2e8f0; border-radius: 999px; overflow: hidden;">
+                                    <div style="width: ${Math.max(0, Math.min(100, d.avg))}%; height: 100%; background: linear-gradient(90deg, ${d.avg>=85?'#34d399':'#60a5fa'}, ${d.avg>=85?'#10b981':'#3b82f6'});"></div>
+                                </div>
+                                <div style="font-size:.75rem; color:var(--text-muted); margin-top:.35rem;">Std Dev ±${d.stdDev}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:0.5rem; justify-content:flex-end; margin-top:1rem;">
+                    <button class="btn btn-secondary" onclick="exportAnalyticsCSV()">Export CSV</button>
+                    <button class="btn btn-primary" onclick="closeModals()">Close</button>
+                </div>
+            `;
+            document.body.appendChild(backdrop); document.body.appendChild(modal);
+            backdrop.onclick = closeModals;
+        }
+        function sendBulkParentUpdates() {
+            ensureSyntheticReady();
+            const count = state.students.length;
+            showNotification(`📧 Sent updates to ${count} parents with personalized highlights.`, 'success');
+        }
+        function viewAnalyticsReport() { openSyntheticReport(); }
+        function adjustClassPacing() {
+            ensureSyntheticReady();
+            const s = syntheticSchool;
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:1.25rem;border-radius:12px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);max-width:520px;z-index:1000;';
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;';
+            modal.innerHTML = `
+                <h3 style="margin-bottom:0.5rem;">👁️ Engagement Adjustment</h3>
+                <div style="margin-bottom:0.5rem;">Current tardy rate ${s.attendance.tardyRatePercent}%. Suggest:</div>
+                <ul style="margin-left:1rem;">
+                    <li>2-minute stretch break and pair-share.</li>
+                    <li>Set timer-driven checkpoints every 10 minutes.</li>
+                    <li>Bell-work to boost on-time starts.</li>
+                </ul>
+                <div style="display:flex;gap:0.5rem;margin-top:0.75rem;">
+                    <button class="btn btn-success" onclick="showNotification('Pacing plan applied for this week', 'success'); closeModals();">Apply Plan</button>
+                    <button class="btn btn-secondary" onclick="closeModals()">Close</button>
+                </div>
+            `;
+            document.body.appendChild(backdrop); document.body.appendChild(modal);
+            backdrop.onclick = closeModals;
+        }
+        function openMessageComposer(from, subject) {
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:1rem;border-radius:12px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);max-width:560px;z-index:1000;';
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;';
+            modal.innerHTML = `
+                <h3>✉️ Reply to ${from}</h3>
+                <div style="margin:0.5rem 0; color:var(--text-muted);">Re: ${subject}</div>
+                <textarea id="replyBody" rows="6" style="width:100%; padding:0.6rem; border:1px solid var(--border); border-radius:8px;" placeholder="Write a concise, positive reply..."></textarea>
+                <div style="display:flex; gap:0.5rem; justify-content:flex-end; margin-top:0.5rem;">
+                    <button class="btn btn-secondary" onclick="closeModals()">Cancel</button>
+                    <button class="btn btn-primary" onclick="showNotification('Reply sent', 'success'); closeModals();">Send</button>
+                </div>
+            `;
+            document.body.appendChild(backdrop); document.body.appendChild(modal);
+            backdrop.onclick = closeModals;
+        }
+        function archiveMessage(btn) {
+            const row = btn.closest('div[style*="border-bottom"]');
+            if (row) { row.remove(); showNotification('Message archived', 'success'); }
+        }
+        // Replace random AI insights with synthetic-driven when starting analysis
+        async function startAIAnalysis() {
+            state.isProcessingAI = true;
+            showNotification('🧠 Starting comprehensive AI analysis...', 'success');
+            try {
+                const insights = computeSyntheticInsights();
+                state.aiInsights = insights.map((i, idx)=> ({ id: Date.now()+idx, ...i }));
+                state.isProcessingAI = false;
+                showNotification(`✅ AI analysis complete! Found ${state.aiInsights.length} insights.`, 'success');
+                if (state.currentTab === 'lift-vision') renderLiftVision(document.getElementById('mainContent'));
+            } catch (e) {
+                state.isProcessingAI = false;
+                showNotification('❌ AI analysis failed. Please try again.', 'error');
+            }
+        }
+        // Student detail modal using deterministic synthetic per-student sample
+        function seededRandom(seed){ let x=Math.sin(seed)*10000; return x - Math.floor(x); }
+        function sampleSubjectScores(studentId){ ensureSyntheticReady(); const s=syntheticSchool; return s.scoreDist.map((d,idx)=>{ const r=seededRandom(studentId*(idx+3)); const val=Math.round(d.avg + (r-0.5)*d.stdDev*2); return {subject:d.subject, score: Math.max(50, Math.min(100, val))}; }); }
+        function openStudentDetailModal(name) {
+            const stu = state.students.find(s => s.name === name);
+            if (!stu) {
+                showNotification('Student not found', 'warning');
+                return;
+            }
+            const scores = sampleSubjectScores(stu.id);
+            const modal = document.createElement('div');
+            modal.className = 'modal-container';
+            modal.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:1.25rem;border-radius:12px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);max-width:640px;z-index:1000;';
+            const backdrop = document.createElement('div');
+            backdrop.className = 'modal-backdrop';
+            backdrop.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;';
+            modal.innerHTML = `
+                <h3>📊 ${stu.name}</h3>
+                <div style="color:var(--text-muted); margin-bottom:0.5rem;">ID ${stu.studentId}</div>
+                <div><strong>Subject Scores:</strong> ${scores.map(s => `${s.subject} ${s.score}`).join(' • ')}</div>
+                <div style="margin-top:0.5rem;"><strong>Status:</strong> ${stu.needsIntervention ? 'Needs Intervention' : 'On Track'}</div>
+                <div style="display:flex; gap:0.5rem; margin-top:0.75rem;">
+                    <button class="btn btn-success" onclick="contactParent('${stu.parentEmail}')">Contact Parent</button>
+                    <button class="btn btn-secondary" onclick="closeModals()">Close</button>
+                </div>
+            `;
+            document.body.appendChild(backdrop);
+            document.body.appendChild(modal);
+            backdrop.onclick = closeModals;
+        }
     </script>
 </body>
+<!-- End of file: cleaned trailing fragment from original paste -->
 </html>
+
+
